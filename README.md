@@ -34,7 +34,7 @@ If you want install this App with testflight, please send your AppleID to us wit
 We use [SemVer](http://semver.org/) for versioning.
 
 ## Authors
-* zhe114
+* [zhe114](https://github.com/zhe114)
 * mwnl lab
 
 ## License
