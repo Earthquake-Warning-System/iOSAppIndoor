@@ -15,7 +15,7 @@ If you want to receive push notification on your mobile phone when indoor phone 
 Download project from git :
 
 ```
-git clone “url”
+git clone “https://github.com/zhe114/iOSAppIndoor.git”
 ```
 
 Open project in Xcode and click build  → make project, then you can run this project.
