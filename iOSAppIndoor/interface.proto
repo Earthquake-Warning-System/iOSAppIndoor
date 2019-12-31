@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+message kp_alive    
+{
+    string packet_type = 1; //keep alive packet : 0
+    string sensor_ID   = 2; //sensor ID
+    uint32 alive_flag  = 3;
+    string country_code= 4;
+    string city_code   = 5;
+    string version     = 6;
+}
+
+message EQ_event
+{
+    string packet_type = 1; //earthquake event packet : 1
+    string sensor_ID   = 2; //sensor ID
+    uint32 event_output= 3;
+    int64  event_sec   = 4;
+    int64  event_usec  = 5;
+    string version     = 6;
+}
+
+message EQ_occur
+{
+    string packet_type = 1; //earthquake occur packet : 2
+    string information = 2;
+    string version     = 3;
+}
+
+message Boot_ask
+{
+    string packet_type = 1; //earthquake occur packet : 3
+    string server_IP   = 2; //server IP
+    int32  server_port = 3;
+    string version     = 4;
+}
+
+message Boot_kp
+{
+    string packet_type = 1; //earthquake occur packet : 4
+    string server_ID   = 2;
+    string version     = 3;
+}
+
+message kp_alive_ack
+{
+    string packet_type = 1; //user keep alive with ack respond : 5
+    string role        = 2; // server : 1 ; user : 0
+    string version     = 3;
+}
+message packet_type         //is used to identify type of packet
+{
+    string packet_type = 1;
+}

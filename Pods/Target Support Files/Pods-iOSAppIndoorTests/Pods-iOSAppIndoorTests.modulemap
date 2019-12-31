@@ -1,0 +1,6 @@
+framework module Pods_iOSAppIndoorTests {
+  umbrella header "Pods-iOSAppIndoorTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

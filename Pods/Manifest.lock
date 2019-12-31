@@ -1,0 +1,24 @@
+PODS:
+  - ProtocolBuffers-Swift (4.0.6)
+  - SwiftProtobuf (1.7.0)
+  - SwiftSocket (2.0.2)
+
+DEPENDENCIES:
+  - ProtocolBuffers-Swift
+  - SwiftProtobuf
+  - SwiftSocket
+
+SPEC REPOS:
+  trunk:
+    - ProtocolBuffers-Swift
+    - SwiftProtobuf
+    - SwiftSocket
+
+SPEC CHECKSUMS:
+  ProtocolBuffers-Swift: 09b5cfcc641ab512d6aaa1d2cc3879a40432052c
+  SwiftProtobuf: 4fd9645e69b72cbae6ec8da5be0cdd20ca6565dd
+  SwiftSocket: 6f4c9c63fbc5c1d61188936bb3c599fd546f40ae
+
+PODFILE CHECKSUM: 8ca715d8cf17ce9fc709f575eeeb1f40426e53ad
+
+COCOAPODS: 1.8.4
