@@ -13,10 +13,14 @@ If you want to receive push notification on your mobile phone when indoor phone 
 ## Installing
 
 Download project from git :
+```sh
+git clone https://github.com/Earthquake-Warning-System/iOSAppIndoor.git
+```
+Notice that this project use Firebase to send notification, so you need to build a account in Firebase and create a project for this, basically, you need finish following things.
+* put google-services.json into mobile version
+* Fill out author key
 
-```
-git clone “url”
-```
+If you need tutorial please check  [FCM setup](https://firebase.google.com/docs/ios/setup)
 
 Open project in Xcode and click build  → make project, then you can run this project.
 
@@ -24,18 +28,9 @@ Open project in Xcode and click build  → make project, then you can run this p
 There is test iOSapp enviroment from Apple name "TestFlight". You can find it in AppStore.
 If you want install this App with testflight, please send your AppleID to us with E-mail : "ncumwnl337@gmail.com", we are willing to invite you into our test list. In several days, we will send email with verification code to your account. Enter the verification code on testflight, you would see our App.
 
-## Built With  
-* [SwiftSocket](https://github.com/swiftsocket/SwiftSocket) - For UDP service
-* [SwiftProtobuf](https://github.com/apple/swift-protobuf) - For protocol buffer
-
-
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning.
-
-## Authors
-* zhe114
-* mwnl lab
 
 ## License
 
