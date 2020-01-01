@@ -14,7 +14,7 @@ If you want to receive push notification on your mobile phone when indoor phone 
 
 Download project from git :
 ```sh
-https://github.com/Earthquake-Warning-System/iOSAppIndoor.git
+git clone https://github.com/Earthquake-Warning-System/iOSAppIndoor.git
 ```
 Notice that this project use Firebase to send notification, so you need to build a account in Firebase and create a project for this, basically, you need finish following things.
 * put google-services.json into mobile version
