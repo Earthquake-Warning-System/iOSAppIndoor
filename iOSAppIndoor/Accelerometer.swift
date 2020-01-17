@@ -15,12 +15,13 @@ var player: AVPlayer?
 let queue4 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
 let queue5 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
 let queue6 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
+let queue7 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
+
 var LastEqTime: Date? = nil
 var EqTime: Date? = nil
 var SecEqTime: Int? = nil
 var uSecEqTime: Double? = nil
 var presentEqImage = false
-var informUserAccl = false
 var lastSendCorrectEqEvent:Bool = false
 var AccelCorrection:Bool = false
 var sendEqEvent:Bool = false
@@ -100,39 +101,39 @@ func startAcclUpdate(){
                     zAccl = 1
                 }else{
                     detectoblique = true
-                    print("Place the phone \n without moving.")
-                    informUserAccl = true
+                    print("Place the phone without moving.")
+                    NotificationCenter.default.post(name: Notification.Name("humanTouch"), object: nil)
                     stopAcclUpdate()
                     detectoblique = false
                 }
                 if xAccl == 1{
                     if testAccl.yAccl < -0.5 && testAccl.yAccl > 0.5{
-                        print("Place the phone \n without moving.")
-                        informUserAccl = true
+                        print("Place the phone without moving.")
+                        NotificationCenter.default.post(name: Notification.Name("humanTouch"), object: nil)
                         stopAcclUpdate()
                     }else if testAccl.zAccl <  -0.5 && testAccl.zAccl > 0.5{
-                        print("Place the phone \n without moving.")
-                        informUserAccl = true
+                        print("Place the phone without moving.")
+                        NotificationCenter.default.post(name: Notification.Name("humanTouch"), object: nil)
                         stopAcclUpdate()
                     }
                 }else if yAccl == 1{
                     if testAccl.xAccl <  -0.5 && testAccl.xAccl > 0.5{
-                        print("Place the phone \n without moving.")
-                        informUserAccl = true
+                        print("Place the phone without moving.")
+                        NotificationCenter.default.post(name: Notification.Name("humanTouch"), object: nil)
                         stopAcclUpdate()
                     }else if testAccl.zAccl <  -0.5 && testAccl.zAccl > 0.5{
-                        print("Place the phone \n without moving.")
-                        informUserAccl = true
+                        print("Place the phone without moving.")
+                        NotificationCenter.default.post(name: Notification.Name("humanTouch"), object: nil)
                         stopAcclUpdate()
                     }
                 }else if zAccl == 1{
                     if testAccl.xAccl <  -0.5 && testAccl.xAccl > 0.5{
-                        print("Place the phone \n without moving.")
-                        informUserAccl = true
+                        print("Place the phone without moving.")
+                        NotificationCenter.default.post(name: Notification.Name("humanTouch"), object: nil)
                         stopAcclUpdate()
                     }else if testAccl.yAccl <  -0.5 && testAccl.yAccl > 0.5{
-                        print("Place the phone \n without moving.")
-                        informUserAccl = true
+                        print("Place the phone without moving.")
+                        NotificationCenter.default.post(name: Notification.Name("humanTouch"), object: nil)
                         stopAcclUpdate()
                     }
                 }
@@ -147,17 +148,11 @@ func startAcclUpdate(){
                         }else{
                             while acclCount > 0{
                                 print(presentAccl[acclCount - 1])
-                                meanAccl += presentAccl[acclCount - 1]
+                                totalAccl += presentAccl[acclCount - 1]
                                 acclCount -= 1
                             }
-                            if logAcclCount < 500{
-                                logAccl[logAcclCount] = meanAccl / 50
-                                logAcclCount += 1
-                                acclCount = 0
-                                meanAccl = 0
-                            }else{
-                                logAcclCount = 0
-                            }
+                            logAccl = totalAccl / 50.0
+                            NotificationCenter.default.post(name: Notification.Name("presentAccl"), object: nil)
                         }
                         
                         if (isNotYetCorrected()) {
@@ -214,9 +209,14 @@ func startAcclUpdate(){
                                                 LastEqTime = EqTime
                                             }
                                             FirstDetect = false
-                                            Alert()
-                                            presentEqImage = true
+                                            queue7.async {
+                                                Alert()
+                                                sleep(3)
+                                                stopAlert()
+                                            }
                                             
+                                            //presentEqImage = true
+                                            NotificationCenter.default.post(name: Notification.Name("presentEqImage"), object: nil)
                                             //To do something after sendEqEvent
                                             if sendEqEvent == false{
                                                 sendEqEvent = true
@@ -238,8 +238,8 @@ func startAcclUpdate(){
                                                     sendEqEvent = false
                                                 }
                                             }
-                                            sleep(3)
-                                            stopAlert()
+                                            //sleep(3)
+                                            //stopAlert()
                                         }
                                         
                                         //Not to repeat detection
@@ -327,24 +327,4 @@ func Alert(){
 }
 func stopAlert(){
     player?.pause()
-}
-class Downloader {
-    func fetechData(callback: (Int) -> ()) {
-        if presentEqImage == true{
-            presentEqImage = false
-            callback(1)
-        }else{
-            callback(0)
-        }
-    }
-}
-class Downloader1 {
-    func fetechData(callback: (Int) -> ()) {
-        if informUserAccl == true{
-            informUserAccl = false
-            callback(1)
-        }else{
-            callback(0)
-        }
-    }
 }

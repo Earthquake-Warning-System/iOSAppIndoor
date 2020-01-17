@@ -138,6 +138,8 @@ class ViewController: UIViewController {
                 }
             }
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(isPresentEqImage(notification:)), name: NSNotification.Name("presentEqImage") , object: nil)
+
     }
     
     //Reset reciprocal of backToForeground.
@@ -206,34 +208,29 @@ class ViewController: UIViewController {
     }
     
     //Receive callback to present alert images.
-    @objc func timerAction() {
-        Downloader().fetechData {
-            //<--- callback variable of function.
-            (progress) -> Void in
-            //<--- callback content of function.
-            if progress == 1{
-                print("Detection is false.")
-                self.presentForDetectingShaking.isHidden = false
-                timer2 = Timer.scheduledTimer(timeInterval:5 , target: self, selector: #selector(self.pressForCancelImage), userInfo: nil, repeats: true)
-            }
+    @objc func isPresentEqImage(notification: NSNotification) {
+        print("Shaking is detected.")
+        DispatchQueue.main.async {
+            self.presentForDetectingShaking.isHidden = false
+            timer2 = Timer.scheduledTimer(timeInterval:5 , target: self, selector: #selector(self.pressForCancelImage), userInfo: nil, repeats: true)
         }
     }
     
     //Receive callback to cancel detection.
-    @objc func timerAction1() {
-        Downloader1().fetechData {
-            //<--- callback variable of function.
-            (progress) -> Void in
-            //<--- callback content of function.
-            if progress == 1{
-                print("Alert user Accl.")
-                self.presentAcclStatus.text = "Do not move."
-                self.display.setTitle("Wait..", for: .normal)
-                self.display.backgroundColor = UIColor.init(red: 241/255.0, green: 213/255.0, blue: 30/255.0, alpha: 0.65)
-                self.display.dim()
-                self.display.wiggle()
-                timer2 = Timer.scheduledTimer(timeInterval:10 , target: self, selector: #selector(self.acclStatusLabel), userInfo: nil, repeats: true)
-            }
+    @objc func isHumanTouch(notification: NSNotification) {
+        print("Alert is humanTouch.")
+        pressStartDetect = false
+        DispatchQueue.main.async {
+            stopAcclUpdate()
+            print("Already stop detecting")
+            print(averageAccZWindow)
+            print(turningPointWindow)
+            self.detectAccl.setOn(false, animated: true)
+            self.display.setTitle("Off", for: .normal)
+            self.display.backgroundColor = UIColor.init(red: 244/255.0, green: 54/255.0, blue: 60/255.0, alpha: 0.65)
+            self.presentAcclStatus.text = "Detect humanTouch"
+            self.display.dim()
+            self.display.wiggle()
         }
     }
     
@@ -249,14 +246,7 @@ class ViewController: UIViewController {
         }
     }
     
-    //present Accl status
-    @objc func acclStatusLabel(){
-        pressStartDetect = false
-        self.detectAccl.setOn(false, animated: true)
-        self.presentAcclStatus.text = "Undetected"
-        display.setTitle("Off", for: .normal)
-        display.backgroundColor = UIColor.init(red: 244/255.0, green: 54/255.0, blue: 60/255.0, alpha: 0.65)
-    }
+    
     @objc func cancelImage(){
         self.presentForReceivingingShaking.isHidden = true
     }
@@ -297,6 +287,8 @@ class ViewController: UIViewController {
             presentAcclStatus.text = "Detecting"
             print("On")
             //main thread for UItext
+            print(averageAccZWindow)
+            print(turningPointWindow)
             if pressStartDetect == false{
                 pressStartDetect = true
                 DispatchQueue.main.async {
@@ -322,18 +314,22 @@ class ViewController: UIViewController {
                     self.display.dim()
                     self.display.wiggle()
                 }
-                if callbackToDo {
+                NotificationCenter.default.addObserver(self, selector: #selector(isHumanTouch(notification:)), name: NSNotification.Name("humanTouch") , object: nil)
+
+                /*if callbackToDo {
                     //play
                     callbackToDo = false
                     timer1 = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.timerAction), userInfo: nil, repeats: true)
                     timer2 = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.timerAction1), userInfo: nil, repeats: true)
-                }
+                }*/
             }
         }else{
-            if callbackToDo == false{
+            /*if callbackToDo == false{
                 callbackToDo = true
                 timer1.invalidate()
-            }
+            }*/
+            print(averageAccZWindow)
+            print(turningPointWindow)
             presentAcclStatus.text = "Undetected"
             display.setTitle("Off", for: .normal)
             display.backgroundColor = UIColor.init(red: 244/255.0, green: 54/255.0, blue: 60/255.0, alpha: 0.65)

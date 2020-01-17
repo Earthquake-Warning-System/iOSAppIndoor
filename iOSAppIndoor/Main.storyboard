@@ -159,10 +159,10 @@
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Undetected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xhj-1a-dOY">
-                                <rect key="frame" x="112.5" y="348.5" width="150" height="30"/>
+                                <rect key="frame" x="87.5" y="348.5" width="200" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="LFV-yV-UqH"/>
-                                    <constraint firstAttribute="width" constant="150" id="SpR-N2-rLt"/>
+                                    <constraint firstAttribute="width" constant="200" id="SpR-N2-rLt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -503,6 +503,7 @@ It will receive notification from EEWSIndoor.</string>
         <image name="image4.jpg" width="600" height="724"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hux-9b-sKA"/>
+        <segue reference="Du8-M0-5or"/>
+        <segue reference="fqg-hk-Pia"/>
     </inferredMetricsTieBreakers>
 </document>

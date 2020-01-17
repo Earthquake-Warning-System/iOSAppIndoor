@@ -11,10 +11,9 @@ import CoreMotion
 
 var kpAliveTime: Date?
 var kpAliveCount = 0
-var meanAccl = 0.0
+var totalAccl = 0.0
 var logAcclTime: Date?
-var logAcclCount = 0
-var logAccl = Array(repeating: 0.0, count: 500)
+var logAccl = 0.0
 
 //present lastkpAlive time and mean of Accl.
 class logController: UIViewController {
@@ -26,20 +25,29 @@ class logController: UIViewController {
         if kpAliveTime != nil{
             let presentKpAliveTime = date2String(kpAliveTime!)
             print("kpAliveTimes is \(kpAliveCount) at \(presentKpAliveTime)" )
-            log.text = "kpAliveTimes is \(kpAliveCount) at \(presentKpAliveTime) GMT＋08:00\n"
+            log.text = "kpAliveTimes is \(kpAliveCount) at \(presentKpAliveTime) GMT＋08:00.\n"
         }else{
             print("kpAliveTimes cannot be sent.")
             log.text = "kpAliveTimes cannot be sent.\n"
         }
         
-        print("Accl = \(meanAccl)")
+        print("Accl = \(totalAccl)")
         log.isEditable = false
         log.textContainer.maximumNumberOfLines = 100
         log.isScrollEnabled = true
         log.backgroundColor = UIColor.black
         log.textColor = UIColor.white
-        log.text += "Accl = \(logAccl)"
+        //log.text += "Accl = \(logAccl)"
         
+        NotificationCenter.default.addObserver(self, selector: #selector(isPresentAccl(notification:)), name: NSNotification.Name("presentAccl") , object: nil)
+        
+    }
+    @objc func isPresentAccl(notification: NSNotification) {
+        DispatchQueue.main.async {
+            let meanAcclTime = Date()
+            let presentmeanAcclTime = self.date2String(meanAcclTime)
+            self.log.text += "Accl = \(logAccl) at \(presentmeanAcclTime)GMT＋08:00. \n"
+        }
     }
     func date2String(_ date:Date, dateFormat:String = "yyyy-MM-dd HH:mm:ss") -> String {
         let formatter = DateFormatter()

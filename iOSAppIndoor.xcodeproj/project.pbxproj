@@ -14,6 +14,8 @@
 		7F00AFF5231BF77A004342C1 /* circularArray2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F00AFF4231BF779004342C1 /* circularArray2.swift */; };
 		7F06DD0E233F506600ADD354 /* dateCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F06DD0D233F506600ADD354 /* dateCount.swift */; };
 		7F0C6E272351CA4F00FCE9F4 /* wiggle&dim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0C6E262351CA4F00FCE9F4 /* wiggle&dim.swift */; };
+		7F1B359623D07390008D60BA /* valueForAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1B359523D07390008D60BA /* valueForAPIKey.swift */; };
+		7F1B359823D073B1008D60BA /* key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F1B359723D073B1008D60BA /* key.plist */; };
 		7F1CB297239EB7FC001D784F /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F1CB296239EB7FC001D784F /* image.jpg */; };
 		7F33FA4C232D069400DBAFB6 /* Accelerometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F33FA4B232D069300DBAFB6 /* Accelerometer.swift */; };
 		7F5620A4238D26E7000B8567 /* QRScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5620A3238D26E6000B8567 /* QRScannerController.swift */; };
@@ -70,6 +72,8 @@
 		7F00AFF4231BF779004342C1 /* circularArray2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = circularArray2.swift; sourceTree = "<group>"; };
 		7F06DD0D233F506600ADD354 /* dateCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateCount.swift; sourceTree = "<group>"; };
 		7F0C6E262351CA4F00FCE9F4 /* wiggle&dim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "wiggle&dim.swift"; sourceTree = "<group>"; };
+		7F1B359523D07390008D60BA /* valueForAPIKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = valueForAPIKey.swift; sourceTree = "<group>"; };
+		7F1B359723D073B1008D60BA /* key.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = key.plist; sourceTree = "<group>"; };
 		7F1CB296239EB7FC001D784F /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
 		7F33FA4B232D069300DBAFB6 /* Accelerometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Accelerometer.swift; sourceTree = "<group>"; };
 		7F5620A3238D26E6000B8567 /* QRScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerController.swift; sourceTree = "<group>"; };
@@ -195,18 +199,20 @@
 				7F00AFF4231BF779004342C1 /* circularArray2.swift */,
 				7F06DD0D233F506600ADD354 /* dateCount.swift */,
 				7F5620A7238D3964000B8567 /* PushNotificationSender.swift */,
+				7F1B359523D07390008D60BA /* valueForAPIKey.swift */,
+				7F5620A3238D26E6000B8567 /* QRScannerController.swift */,
+				7F0C6E262351CA4F00FCE9F4 /* wiggle&dim.swift */,
+				7F9213FF2318D145001BE1E8 /* Interface.proto.swift */,
 				7F9213F52318D02F001BE1E8 /* Alert.mp3 */,
 				7F1CB296239EB7FC001D784F /* image.jpg */,
 				7FB793FF23A7E7CE005661A6 /* image4.jpg */,
 				7FB793FD23A7E7A2005661A6 /* image3.jpeg */,
 				7F9213E32318CFEC001BE1E8 /* Main.storyboard */,
-				7F5620A3238D26E6000B8567 /* QRScannerController.swift */,
-				7F0C6E262351CA4F00FCE9F4 /* wiggle&dim.swift */,
 				7F9213FD2318D13F001BE1E8 /* interface.proto */,
-				7F9213FF2318D145001BE1E8 /* Interface.proto.swift */,
 				7FF0B7BA2318BF1D008F9CAA /* Assets.xcassets */,
 				7FF0B7BC2318BF1D008F9CAA /* LaunchScreen.storyboard */,
 				7FF0B7BF2318BF1D008F9CAA /* Info.plist */,
+				7F1B359723D073B1008D60BA /* key.plist */,
 				7F934361238FCD62001A9690 /* zheHeish.iOSAppIndoor.xcdatamodeld */,
 			);
 			path = iOSAppIndoor;
@@ -357,6 +363,7 @@
 				7FF0B7BE2318BF1D008F9CAA /* LaunchScreen.storyboard in Resources */,
 				7FF0B7BB2318BF1D008F9CAA /* Assets.xcassets in Resources */,
 				7F1CB297239EB7FC001D784F /* image.jpg in Resources */,
+				7F1B359823D073B1008D60BA /* key.plist in Resources */,
 				7FB7940023A7E7CE005661A6 /* image4.jpg in Resources */,
 				7FB793FE23A7E7A3005661A6 /* image3.jpeg in Resources */,
 				7F9213FC2318D02F001BE1E8 /* Alert.mp3 in Resources */,
@@ -493,6 +500,7 @@
 				7F9214002318D146001BE1E8 /* Interface.proto.swift in Sources */,
 				7F9213EE2318D00E001BE1E8 /* send.swift in Sources */,
 				7FF0B7B42318BF13008F9CAA /* AppDelegate.swift in Sources */,
+				7F1B359623D07390008D60BA /* valueForAPIKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

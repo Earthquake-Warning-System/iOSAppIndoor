@@ -20,8 +20,12 @@ class PushNotificationSender {
         request.httpMethod = "POST"
         request.httpBody = try? JSONSerialization.data(withJSONObject:paramString, options: [.prettyPrinted])
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        //import your FCM key by key.plist
+        let FCMkey = valueForAPIKey(named: "key")
+        
         //Enter the key from your FCM iOS project.
-        request.setValue("key= ", forHTTPHeaderField: "Authorization")
+        request.setValue("key= \(FCMkey)", forHTTPHeaderField: "Authorization")
         let task =  URLSession.shared.dataTask(with: request as URLRequest)  { (data, response, error) in
             do {
                 if let jsonData = data {
