@@ -9,7 +9,7 @@
 import Foundation
 
 var sendCorrectEqEvent:Bool = false
-var FirstDetect = true
+var thisLaunchFirstDetect = true
 var valueOfReliable: Double = 100
 
 public func dateCount(eqTime: Date?, lastEqTime: Date?){

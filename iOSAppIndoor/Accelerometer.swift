@@ -6,9 +6,11 @@
 //  Copyright © 2019年 mwnl. All rights reserved.
 //
 
+import UIKit
 import Foundation
 import CoreMotion
 import AVFoundation
+import CoreData
 
 var player: AVPlayer?
 
@@ -147,7 +149,6 @@ func startAcclUpdate(){
                             acclCount += 1
                         }else{
                             while acclCount > 0{
-                                print(presentAccl[acclCount - 1])
                                 totalAccl += presentAccl[acclCount - 1]
                                 acclCount -= 1
                             }
@@ -182,7 +183,8 @@ func startAcclUpdate(){
                                     treadDetect = true
                                     queue6.async{
                                         if (isEqOccur(estimatedValue: estimatedValue)) {
-                                            if FirstDetect{
+                                            if isFirstDetect{
+                                                print("isFirstLaunch")
                                                 valueOfReliable = 100
                                                 LastEqTime = Date()
                                                 print(LastEqTime as Any)
@@ -193,22 +195,47 @@ func startAcclUpdate(){
                                                 print(SecEqTime as Any)
                                                 uSecEqTime = y
                                                 print(uSecEqTime as Any)
-                                            }else if lastSendCorrectEqEvent{
+                                            }else if thisLaunchFirstDetect{
+                                                print("thisLaunchFirstDetect")
+                                                //fetchCoreData()
+                                                print(LastEqTime as Any)
+                                                if LastEqTime == nil{
+                                                    LastEqTime = Date()
+                                                    let secdate = LastEqTime!.timeIntervalSince1970 + 28800
+                                                    let x = Int(secdate)
+                                                    let y  = (secdate - Double(x)) * 1000000
+                                                    SecEqTime = x
+                                                    uSecEqTime = y
+                                                    valueOfReliable = 50
+                                                }else{
+                                                    let secdate = LastEqTime!.timeIntervalSince1970 + 28800
+                                                    let x = Int(secdate)
+                                                    let y  = (secdate - Double(x)) * 1000000
+                                                    SecEqTime = x
+                                                    uSecEqTime = y
+                                                    EqTime = Date()
+                                                    dateCount(eqTime: EqTime, lastEqTime: LastEqTime)
+                                                    LastEqTime = EqTime
+                                                }
+                                            }
+                                            else if lastSendCorrectEqEvent{
+                                                print("lastSendCorrectEqEvent")
                                                 lastSendCorrectEqEvent = false
                                                 valueOfReliable = 100
                                             }else{
+                                                print("recountReliability")
                                                 EqTime = Date()
+                                                print(EqTime as Any)
                                                 let secdate = EqTime!.timeIntervalSince1970 + 28800
                                                 let x = Int(secdate)
                                                 let y  = (secdate - Double(x)) * 1000000
                                                 SecEqTime = x
-                                                print(SecEqTime as Any)
                                                 uSecEqTime = y
-                                                print(uSecEqTime as Any)
                                                 dateCount(eqTime: EqTime, lastEqTime: LastEqTime)
                                                 LastEqTime = EqTime
                                             }
-                                            FirstDetect = false
+                                            isFirstDetect = false
+                                            thisLaunchFirstDetect = false
                                             queue7.async {
                                                 Alert()
                                                 sleep(3)
@@ -217,6 +244,7 @@ func startAcclUpdate(){
                                             
                                             //presentEqImage = true
                                             NotificationCenter.default.post(name: Notification.Name("presentEqImage"), object: nil)
+                                            
                                             //To do something after sendEqEvent
                                             if sendEqEvent == false{
                                                 sendEqEvent = true
@@ -327,4 +355,28 @@ func Alert(){
 }
 func stopAlert(){
     player?.pause()
+}
+func fetchCoreData (){
+    
+    guard let appDel = UIApplication.shared.delegate as? AppDelegate else { return }
+    
+    let context = appDel.persistentContainer.viewContext
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "LastData")
+    fetchRequest.fetchLimit = 5
+    
+    do {
+        let result = try context.fetch(fetchRequest)
+        for data in result as! [NSManagedObject] {
+            print("Searching name is \(data.value(forKey: "name") as! String)")
+            print("Searching lastDate is \(data.value(forKey: "lastDate") as! Date)")
+            LastEqTime = data.value(forKey: "lastDate") as? Date
+            print(LastEqTime as Any)
+            print("Searching reliability is \(data.value(forKey: "reliability") as! Int32)")
+            
+        }
+    } catch {
+        
+        print("Failed")
+    }
+    
 }

@@ -9,6 +9,9 @@
 import UIKit
 import CoreData
 
+var isFirstLaunch = false
+var isFirstDetect = false
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -17,6 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        if UserDefaults.isFirstLaunch() {
+            //do something when first launch
+            print("First launch")
+            isFirstLaunch = true
+            isFirstDetect = true
+        }
+        
         return true
     }
     
@@ -28,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        print("Enter background.")
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -41,7 +53,60 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
+        print("End point.")
+        
+        if isFirstLaunch{
+            addLastDate()
+        }else{
+            if isNoData{
+                addLastDate()
+            }else{
+                updateData()
+            }
+            
+        }
+        
+        fetchCoreData()
         self.saveContext()
+    }
+    func addLastDate(){
+        guard let appDel = UIApplication.shared.delegate as? AppDelegate else {return}
+        
+        let context = appDel.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "LastData", in: context)
+        let lastData = NSManagedObject(entity: entity!, insertInto: context)
+        lastData.setValue(LastEqTime, forKeyPath: "lastDate")
+        lastData.setValue(valueOfReliable, forKey: "reliability")
+        lastData.setValue("Data", forKey: "name")
+        do{
+            try context.save()
+            print("save successfully")
+        }catch{
+            print(error)
+        }
+    }
+    func updateData(){
+        guard let appDel = UIApplication.shared.delegate as? AppDelegate else { return }
+        
+        let context = appDel.persistentContainer.viewContext
+        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "LastData")
+        request.predicate = NSPredicate(format: "name == %@", "Data")
+        
+        do{
+            let test = try context.fetch(request)
+            
+            let objectUpdate = test[0] as! NSManagedObject
+            objectUpdate.setValue("Data", forKey: "name")
+            objectUpdate.setValue(LastEqTime, forKey: "lastDate")
+            objectUpdate.setValue(valueOfReliable, forKey: "reliability")
+            do{
+                try context.save()
+            }catch{
+                print(error)
+            }
+        } catch {
+            fatalError("Failed to update data: \(error)")
+        }
     }
     
     // MARK: - Core Data stack

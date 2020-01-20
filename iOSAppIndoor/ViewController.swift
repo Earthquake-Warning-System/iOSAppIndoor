@@ -18,6 +18,7 @@ var getNewCS: Bool = false
 var kpTime = Int.random(in: -1800...1800) + 3600
 let BoostrapServer = UDPClient(address: "140.115.153.209", port: 7777)
 var CountryServer = UDPClient(address: "", port: 0)
+var isNoData = true
 
 let queue0 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
 let queue1 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
@@ -70,7 +71,8 @@ class ViewController: UIViewController {
         
         //Write coredata into Array
         fetchToken()
-        
+        fetchCoreData()
+        print("here")
         //Connect with Server
         queue0.async {
             if connectToServer == false{
@@ -223,8 +225,6 @@ class ViewController: UIViewController {
         DispatchQueue.main.async {
             stopAcclUpdate()
             print("Already stop detecting")
-            print(averageAccZWindow)
-            print(turningPointWindow)
             self.detectAccl.setOn(false, animated: true)
             self.display.setTitle("Off", for: .normal)
             self.display.backgroundColor = UIColor.init(red: 244/255.0, green: 54/255.0, blue: 60/255.0, alpha: 0.65)
@@ -287,8 +287,6 @@ class ViewController: UIViewController {
             presentAcclStatus.text = "Detecting"
             print("On")
             //main thread for UItext
-            print(averageAccZWindow)
-            print(turningPointWindow)
             if pressStartDetect == false{
                 pressStartDetect = true
                 DispatchQueue.main.async {
@@ -315,21 +313,8 @@ class ViewController: UIViewController {
                     self.display.wiggle()
                 }
                 NotificationCenter.default.addObserver(self, selector: #selector(isHumanTouch(notification:)), name: NSNotification.Name("humanTouch") , object: nil)
-
-                /*if callbackToDo {
-                    //play
-                    callbackToDo = false
-                    timer1 = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.timerAction), userInfo: nil, repeats: true)
-                    timer2 = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.timerAction1), userInfo: nil, repeats: true)
-                }*/
             }
         }else{
-            /*if callbackToDo == false{
-                callbackToDo = true
-                timer1.invalidate()
-            }*/
-            print(averageAccZWindow)
-            print(turningPointWindow)
             presentAcclStatus.text = "Undetected"
             display.setTitle("Off", for: .normal)
             display.backgroundColor = UIColor.init(red: 244/255.0, green: 54/255.0, blue: 60/255.0, alpha: 0.65)
@@ -343,6 +328,34 @@ class ViewController: UIViewController {
             }
         }
     }
+    func fetchCoreData (){
+        
+        guard let appDel = UIApplication.shared.delegate as? AppDelegate else { return }
+        
+        let context = appDel.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "LastData")
+        fetchRequest.fetchLimit = 5
+        
+        do {
+            let result = try context.fetch(fetchRequest)
+            for data in result as! [NSManagedObject] {
+                if data.value(forKey: "name") as! String == "Data"{
+                    isNoData = false
+                }
+                print("Searching name is \(data.value(forKey: "name") as! String)")
+                print("Searching lastDate is \(data.value(forKey: "lastDate") as! Date)")
+                LastEqTime = data.value(forKey: "lastDate") as? Date
+                print(LastEqTime as Any)
+                print("Searching reliability is \(data.value(forKey: "reliability") as! Int32)")
+                
+            }
+        } catch {
+            
+            print("Failed")
+        }
+        
+    }
+
 }
 
 

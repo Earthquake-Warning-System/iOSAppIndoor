@@ -16,6 +16,7 @@
 		7F0C6E272351CA4F00FCE9F4 /* wiggle&dim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0C6E262351CA4F00FCE9F4 /* wiggle&dim.swift */; };
 		7F1B359623D07390008D60BA /* valueForAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1B359523D07390008D60BA /* valueForAPIKey.swift */; };
 		7F1B359823D073B1008D60BA /* key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F1B359723D073B1008D60BA /* key.plist */; };
+		7F1B35EC23D5F755008D60BA /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1B35EB23D5F755008D60BA /* UserDefaults.swift */; };
 		7F1CB297239EB7FC001D784F /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F1CB296239EB7FC001D784F /* image.jpg */; };
 		7F33FA4C232D069400DBAFB6 /* Accelerometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F33FA4B232D069300DBAFB6 /* Accelerometer.swift */; };
 		7F5620A4238D26E7000B8567 /* QRScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5620A3238D26E6000B8567 /* QRScannerController.swift */; };
@@ -74,6 +75,7 @@
 		7F0C6E262351CA4F00FCE9F4 /* wiggle&dim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "wiggle&dim.swift"; sourceTree = "<group>"; };
 		7F1B359523D07390008D60BA /* valueForAPIKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = valueForAPIKey.swift; sourceTree = "<group>"; };
 		7F1B359723D073B1008D60BA /* key.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = key.plist; sourceTree = "<group>"; };
+		7F1B35EB23D5F755008D60BA /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		7F1CB296239EB7FC001D784F /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
 		7F33FA4B232D069300DBAFB6 /* Accelerometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Accelerometer.swift; sourceTree = "<group>"; };
 		7F5620A3238D26E6000B8567 /* QRScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerController.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				7FF0B7B32318BF13008F9CAA /* AppDelegate.swift */,
+				7F1B35EB23D5F755008D60BA /* UserDefaults.swift */,
 				7F9213E12318CFDF001BE1E8 /* ViewController.swift */,
 				7FB7940123A8C420005661A6 /* logController.swift */,
 				7F9213E52318CFF5001BE1E8 /* kpAlive.swift */,
@@ -483,6 +486,7 @@
 				7FB7940223A8C420005661A6 /* logController.swift in Sources */,
 				7F9213FB2318D02F001BE1E8 /* sendToBoot.swift in Sources */,
 				7F00AFF3231BF772004342C1 /* circularArray1.swift in Sources */,
+				7F1B35EC23D5F755008D60BA /* UserDefaults.swift in Sources */,
 				7F9213EC2318D008001BE1E8 /* kpAliveAck.swift in Sources */,
 				7F9213E22318CFDF001BE1E8 /* ViewController.swift in Sources */,
 				7F9213EA2318D001001BE1E8 /* bootAsk.swift in Sources */,
