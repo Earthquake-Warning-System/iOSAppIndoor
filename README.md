@@ -24,6 +24,11 @@ If you need tutorial please check  [FCM setup](https://firebase.google.com/docs/
 
 Open project in Xcode and click build  → make project, then you can run this project.
 
+### Fill in your own FCM key
+
+If you have own Firebase project, you must remember to fill in the key to the project. How to work? Create a property list, and set a key which include your FCMkey. That's all!
+If you were still confused, check the [web](https://dev.iachieved.it/iachievedit/using-property-lists-for-api-keys-in-swift-applications/)
+
 ## Download from TestFlight
 There is test iOSapp enviroment from Apple name "TestFlight". You can find it in AppStore.
 If you want install this App with testflight, please send your AppleID to us with E-mail : "ncumwnl337@gmail.com", we are willing to invite you into our test list. In several days, we will send email with verification code to your account. Enter the verification code on testflight, you would see our App.
