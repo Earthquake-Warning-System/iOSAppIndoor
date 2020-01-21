@@ -72,7 +72,7 @@ class ViewController: UIViewController {
         //Write coredata into Array
         fetchToken()
         fetchCoreData()
-        print("here")
+        
         //Connect with Server
         queue0.async {
             if connectToServer == false{
@@ -328,33 +328,7 @@ class ViewController: UIViewController {
             }
         }
     }
-    func fetchCoreData (){
-        
-        guard let appDel = UIApplication.shared.delegate as? AppDelegate else { return }
-        
-        let context = appDel.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "LastData")
-        fetchRequest.fetchLimit = 5
-        
-        do {
-            let result = try context.fetch(fetchRequest)
-            for data in result as! [NSManagedObject] {
-                if data.value(forKey: "name") as! String == "Data"{
-                    isNoData = false
-                }
-                print("Searching name is \(data.value(forKey: "name") as! String)")
-                print("Searching lastDate is \(data.value(forKey: "lastDate") as! Date)")
-                LastEqTime = data.value(forKey: "lastDate") as? Date
-                print(LastEqTime as Any)
-                print("Searching reliability is \(data.value(forKey: "reliability") as! Int32)")
-                
-            }
-        } catch {
-            
-            print("Failed")
-        }
-        
-    }
+    
 
 }
 

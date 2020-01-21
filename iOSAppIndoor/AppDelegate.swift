@@ -65,50 +65,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
         }
-        
         fetchCoreData()
         self.saveContext()
     }
-    func addLastDate(){
-        guard let appDel = UIApplication.shared.delegate as? AppDelegate else {return}
         
-        let context = appDel.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "LastData", in: context)
-        let lastData = NSManagedObject(entity: entity!, insertInto: context)
-        lastData.setValue(LastEqTime, forKeyPath: "lastDate")
-        lastData.setValue(valueOfReliable, forKey: "reliability")
-        lastData.setValue("Data", forKey: "name")
-        do{
-            try context.save()
-            print("save successfully")
-        }catch{
-            print(error)
-        }
-    }
-    func updateData(){
-        guard let appDel = UIApplication.shared.delegate as? AppDelegate else { return }
-        
-        let context = appDel.persistentContainer.viewContext
-        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "LastData")
-        request.predicate = NSPredicate(format: "name == %@", "Data")
-        
-        do{
-            let test = try context.fetch(request)
-            
-            let objectUpdate = test[0] as! NSManagedObject
-            objectUpdate.setValue("Data", forKey: "name")
-            objectUpdate.setValue(LastEqTime, forKey: "lastDate")
-            objectUpdate.setValue(valueOfReliable, forKey: "reliability")
-            do{
-                try context.save()
-            }catch{
-                print(error)
-            }
-        } catch {
-            fatalError("Failed to update data: \(error)")
-        }
-    }
-    
     // MARK: - Core Data stack
     
     lazy var persistentContainer: NSPersistentContainer = {
