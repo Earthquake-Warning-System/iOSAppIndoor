@@ -48,7 +48,6 @@ class ViewController: UIViewController {
         lowPowerMode.isHidden = true
         presentForDetectingShaking.isHidden = true
         presentForReceivingingShaking.isHidden = true
-        deleteTokens.isHidden = true
         
         //Initialize presentation of Buttons
         if initialButton == false{
@@ -75,6 +74,7 @@ class ViewController: UIViewController {
         
         //Connect with Server
         queue0.async {
+            //connectToServer = true
             if connectToServer == false{
                 connectToServer = true
                 bootAsk()
@@ -159,21 +159,20 @@ class ViewController: UIViewController {
         guard let appDel = UIApplication.shared.delegate as? AppDelegate else {return}
         let context = appDel.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Token")
-        fetchRequest.fetchLimit = 4
+        var arrt = [String]()
+        fetchRequest.fetchLimit = 10
         do {
             let result = try context.fetch(fetchRequest)
-            var l = 0
+            //var l = 0
             for data in result as! [NSManagedObject]{
+                print(data.value(forKey: "name") as! String)
                 print(data.value(forKey: "token") as! String)
-                deviceToken[l] = (data.value(forKey: "token") as! String)
-                l += 1
-                if l > 3{
-                    l = 0
-                }
+                arrt.append(data.value(forKey: "token") as! String)
             }
         }catch {
             print("Failed")
         }
+        deviceToken = arrt
         print(deviceToken)
     }
     
@@ -257,6 +256,7 @@ class ViewController: UIViewController {
         if counterToForeground > 30{
             background.isHidden = true
             lowPowerMode.isHidden = false
+            deleteTokens.isHidden = true
             QRCodeGen.isHidden = true
             display.isHidden = true
             detectAccl.isHidden = true
@@ -267,6 +267,7 @@ class ViewController: UIViewController {
         }else{
             presentLog.isHidden = false
             background.isHidden = false
+            deleteTokens.isHidden = false
             lowPowerMode.isHidden = true
             QRCodeGen.isHidden = false
             display.isHidden = false
@@ -274,11 +275,6 @@ class ViewController: UIViewController {
             detectAccl.isHidden = false
             illustration.isHidden = false
         }
-    }
-    @IBAction func deleteTokens(_ sender: Any) {
-        deleteToken()
-        print("Complete deleting tokens.")
-        fetchToken()
     }
     
     //switch bar status

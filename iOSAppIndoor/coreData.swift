@@ -32,7 +32,7 @@ func fetchCoreData (){
     
     let context = appDel.persistentContainer.viewContext
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "LastData")
-    fetchRequest.fetchLimit = 5
+    fetchRequest.fetchLimit = 10
     
     do {
         let result = try context.fetch(fetchRequest)

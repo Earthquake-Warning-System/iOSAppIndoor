@@ -15,7 +15,9 @@ let queue8 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
 var detectToken:Bool = false
 var token:String = "123"
 var i = 0
-var deviceToken = ["0","1","2","3"]
+var deviceToken = [String]()
+var tokenName = ["a","b","c","d","e","f","g","h","i","j"]
+var tokenNameCount = 0
 
 class QRScannerController: UIViewController {
 
@@ -132,6 +134,13 @@ class QRScannerController: UIViewController {
         let tokens = NSManagedObject(entity: entity!, insertInto: context)
         print(Token)
         tokens.setValue(Token, forKeyPath: "token")
+        tokens.setValue(tokenName[tokenNameCount], forKeyPath: "name")
+        name.append(tokenName[tokenNameCount])
+        if tokenNameCount > 10{
+            tokenNameCount = 0
+        }else{
+            tokenNameCount += 1
+        }
         do{
             try context.save()
             print("save successfully")
