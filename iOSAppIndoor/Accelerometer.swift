@@ -343,8 +343,14 @@ func isEqOccur(estimatedValue: Double)->Bool{
     }
 }
 
-func Alert(){
+public func Alert(){
     if let url = Bundle.main.url(forResource: "Alert", withExtension: "mp3") {
+        do{
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+        } catch {
+            //Didn't work
+            print(error)
+        }
         player = AVPlayer(url: url)
         if player?.rate == 0 {
             player?.play()
@@ -353,6 +359,7 @@ func Alert(){
         }
     }
 }
-func stopAlert(){
+public func stopAlert(){
     player?.pause()
 }
+

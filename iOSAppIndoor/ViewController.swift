@@ -165,7 +165,7 @@ class ViewController: UIViewController {
             let result = try context.fetch(fetchRequest)
             //var l = 0
             for data in result as! [NSManagedObject]{
-                print(data.value(forKey: "name") as! String)
+                print(data.value(forKey: "name") as Any)
                 print(data.value(forKey: "token") as! String)
                 arrt.append(data.value(forKey: "token") as! String)
             }
