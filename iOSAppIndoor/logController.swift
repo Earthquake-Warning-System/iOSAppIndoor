@@ -10,7 +10,9 @@ import UIKit
 import CoreMotion
 
 var kpAliveTime: Date?
+var eqEventTime: Date?
 var kpAliveCount = 0
+var eqEventCount = 0
 var totalAccl = 0.0
 var logAcclTime: Date?
 var logAccl = 0.0
@@ -19,6 +21,7 @@ var logAccl = 0.0
 class logController: UIViewController {
     
     @IBOutlet weak var log: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,6 +32,15 @@ class logController: UIViewController {
         }else{
             print("kpAliveTimes cannot be sent.")
             log.text = "kpAliveTimes cannot be sent.\n"
+        }
+        
+        if eqEventTime != nil{
+            let presentEqEventTime = date2String(eqEventTime!)
+            print("EqEventTimes is \(eqEventCount) at \(presentEqEventTime)" )
+            log.text += "EqEventTimes is \(eqEventCount) at \(presentEqEventTime) GMT＋08:00.\n"
+        }else{
+            print("EqEventTimes cannot be sent.")
+            log.text += "EqEventTimes cannot be sent.\n"
         }
         
         print("Accl = \(totalAccl)")
@@ -49,7 +61,7 @@ class logController: UIViewController {
             self.log.text += "Accl = \(logAccl) at \(presentmeanAcclTime)GMT＋08:00. \n"
         }
     }
-    func date2String(_ date:Date, dateFormat:String = "yyyy-MM-dd HH:mm:ss") -> String {
+    public func date2String(_ date:Date, dateFormat:String = "yyyy-MM-dd HH:mm:ss") -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale.init(identifier: "zh_Hant_TW")
         formatter.dateFormat = dateFormat

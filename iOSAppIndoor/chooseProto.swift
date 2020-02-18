@@ -20,6 +20,8 @@ public func chooseProto(packetType: PacketType, recvProto: Data){
         sendCorrectEqEvent = true
         print("Shake Occurred")
         print(decodeData2)
+        eqEventCount += 1
+        eqEventTime = Date()
         var l = 0
         if l < 4{
             if deviceToken[l].count > 5{

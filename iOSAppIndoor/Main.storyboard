@@ -123,7 +123,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="HuY-vy-1fl" kind="presentation" id="7D6-Bn-8zW"/>
+                                    <segue destination="HuY-vy-1fl" kind="presentation" id="XRH-je-CjM"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afJ-Sy-DVO">
@@ -245,7 +245,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="presentation" id="NeL-pl-G1c"/>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" id="aWt-rd-kdm"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MKp-qA-FUV">
@@ -565,6 +565,6 @@ It will receive notification from EEWSIndoor.</string>
         <image name="image4.jpg" width="600" height="724"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NeL-pl-G1c"/>
+        <segue reference="aWt-rd-kdm"/>
     </inferredMetricsTieBreakers>
 </document>
