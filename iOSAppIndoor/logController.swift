@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  logController.swift
 //  3Axis_Geosensor
 //
 //  Created by Macbook on 8/30/19.
@@ -39,11 +39,12 @@ class logController: UIViewController {
             print("EqEventTimes is \(eqEventCount) at \(presentEqEventTime)" )
             log.text += "EqEventTimes is \(eqEventCount) at \(presentEqEventTime) GMT＋08:00.\n"
         }else{
-            print("EqEventTimes cannot be sent.")
-            log.text += "EqEventTimes cannot be sent.\n"
+            print("EqEvent is not detected.")
+            log.text += "EqEvent is not detected.\n"
         }
-        
+        print(presentAccl.count)
         print("Accl = \(totalAccl)")
+        
         log.isEditable = false
         log.textContainer.maximumNumberOfLines = 100
         log.isScrollEnabled = true
@@ -52,6 +53,8 @@ class logController: UIViewController {
         //log.text += "Accl = \(logAccl)"
         
         NotificationCenter.default.addObserver(self, selector: #selector(isPresentAccl(notification:)), name: NSNotification.Name("presentAccl") , object: nil)
+        totalAccl = 0.0
+        logAccl = 0.0
         
     }
     @objc func isPresentAccl(notification: NSNotification) {
@@ -59,6 +62,7 @@ class logController: UIViewController {
             let meanAcclTime = Date()
             let presentmeanAcclTime = self.date2String(meanAcclTime)
             self.log.text += "Accl = \(logAccl) at \(presentmeanAcclTime)GMT＋08:00. \n"
+            
         }
     }
     public func date2String(_ date:Date, dateFormat:String = "yyyy-MM-dd HH:mm:ss") -> String {

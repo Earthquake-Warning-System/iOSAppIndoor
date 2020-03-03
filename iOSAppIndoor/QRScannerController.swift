@@ -13,10 +13,10 @@ import Foundation
 
 let queue8 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
 var detectToken:Bool = false
-var token:String = "123"
+var token:String = ""
 var i = 0
 var deviceToken = [String]()
-var tokenName = ["a","b","c","d","e","f","g","h","i","j"]
+var iPhoneName = ""
 var tokenNameCount = 0
 
 class QRScannerController: UIViewController {
@@ -134,8 +134,8 @@ class QRScannerController: UIViewController {
         let tokens = NSManagedObject(entity: entity!, insertInto: context)
         print(Token)
         tokens.setValue(Token, forKeyPath: "token")
-        tokens.setValue(tokenName[tokenNameCount], forKeyPath: "name")
-        name.append(tokenName[tokenNameCount])
+        tokens.setValue(iPhoneName, forKeyPath: "name")
+        name.append(iPhoneName)
         if tokenNameCount > 10{
             tokenNameCount = 0
         }else{
@@ -170,10 +170,16 @@ extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
             qrCodeFrameView?.frame = barCodeObject!.bounds
             
             if metadataObj.stringValue != nil {
-                token = metadataObj.stringValue!
+                
+                let scanText = metadataObj.stringValue!
+                let scanTextArray = scanText.components(separatedBy: ",")
+                token = scanTextArray[0]
+                iPhoneName = scanTextArray[1]
                 messageLabel.text = token
+                
                 if detectToken == false{
                     print(token as Any)
+                    print(iPhoneName)
                     print(deviceToken)
                     self.addToken(Token: token)
                     detectToken = true

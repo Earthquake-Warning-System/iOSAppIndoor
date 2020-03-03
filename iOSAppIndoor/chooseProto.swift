@@ -23,7 +23,7 @@ public func chooseProto(packetType: PacketType, recvProto: Data){
         eqEventCount += 1
         eqEventTime = Date()
         var l = 0
-        if l < 4{
+        while l < 10{
             if deviceToken[l].count > 5{
                 let sender = PushNotificationSender()
                 sender.sendPushNotification(to: deviceToken[l], title: "Warning", body: "Sharking Detected")

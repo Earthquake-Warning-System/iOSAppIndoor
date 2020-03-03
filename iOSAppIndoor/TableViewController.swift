@@ -10,7 +10,6 @@ import UIKit
 import CoreData
 
 var name = ["a","b","c","d","e","f","g","h","i","j"]
-var numberArray = ["one","two","three","four","five","six"]
 var nameToDelete: String?
 var reff = ""
 class TableViewController: UITableViewController {
