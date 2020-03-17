@@ -5,9 +5,11 @@ import ProtocolBuffers
 import SwiftProtobuf
 import CoreData
 
-var timer2 = Timer()
 var timer1 = Timer()
+var timer2 = Timer()
+var timer3 = Timer()
 var timerToBackForeground : Timer?
+
 var initialButton = false
 var callbackToDo = true
 var counterToForeground = 0.0
@@ -24,6 +26,7 @@ let queue0 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
 let queue1 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
 let queue2 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
 let queue3 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
+let queue8 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
 
 class ViewController: UIViewController {
     
@@ -44,6 +47,8 @@ class ViewController: UIViewController {
         
         // Do any additional setup after loading the view, typically from a nib.
         timerToBackForeground = Timer.scheduledTimer(timeInterval:1, target:self, selector:#selector(self.prozessTimer), userInfo: nil, repeats: true)
+        timer3 = Timer.scheduledTimer(timeInterval:30, target: self, selector: #selector(self.shortKpAlive), userInfo: nil, repeats: true)
+        
         UIApplication.shared.isIdleTimerDisabled = true
         lowPowerMode.isHidden = true
         presentForDetectingShaking.isHidden = true
@@ -151,6 +156,10 @@ class ViewController: UIViewController {
             print(" X:\(loc.x) Y:\(loc.y) ")
             counterToForeground = 0
         }
+    }
+    
+    @objc func shortKpAlive(){
+        kpAliveSimple()
     }
     
     //Fetch coredata

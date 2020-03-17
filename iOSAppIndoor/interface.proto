@@ -48,6 +48,7 @@ message kp_alive_ack
     string role        = 2; // server : 1 ; user : 0
     string version     = 3;
 }
+
 message packet_type         //is used to identify type of packet
 {
     string packet_type = 1;

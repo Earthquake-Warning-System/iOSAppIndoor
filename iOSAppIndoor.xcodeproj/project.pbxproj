@@ -38,6 +38,7 @@
 		7F9213FE2318D140001BE1E8 /* interface.proto in Sources */ = {isa = PBXBuildFile; fileRef = 7F9213FD2318D13F001BE1E8 /* interface.proto */; };
 		7F9214002318D146001BE1E8 /* Interface.proto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9213FF2318D145001BE1E8 /* Interface.proto.swift */; };
 		7F934363238FCD62001A9690 /* zheHeish.iOSAppIndoor.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7F934361238FCD62001A9690 /* zheHeish.iOSAppIndoor.xcdatamodeld */; };
+		7FA25F872420E034008BDED4 /* kpAliveSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA25F862420E034008BDED4 /* kpAliveSimple.swift */; };
 		7FB793FE23A7E7A3005661A6 /* image3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 7FB793FD23A7E7A2005661A6 /* image3.jpeg */; };
 		7FB7940023A7E7CE005661A6 /* image4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FB793FF23A7E7CE005661A6 /* image4.jpg */; };
 		7FB7940223A8C420005661A6 /* logController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB7940123A8C420005661A6 /* logController.swift */; };
@@ -99,6 +100,7 @@
 		7F9213FD2318D13F001BE1E8 /* interface.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; path = interface.proto; sourceTree = "<group>"; };
 		7F9213FF2318D145001BE1E8 /* Interface.proto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interface.proto.swift; sourceTree = "<group>"; };
 		7F934362238FCD62001A9690 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		7FA25F862420E034008BDED4 /* kpAliveSimple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kpAliveSimple.swift; sourceTree = "<group>"; };
 		7FB793FD23A7E7A2005661A6 /* image3.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image3.jpeg; sourceTree = "<group>"; };
 		7FB793FF23A7E7CE005661A6 /* image4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image4.jpg; sourceTree = "<group>"; };
 		7FB7940123A8C420005661A6 /* logController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logController.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				7F9213E12318CFDF001BE1E8 /* ViewController.swift */,
 				7FB7940123A8C420005661A6 /* logController.swift */,
 				7F1B35F923EBF6F2008D60BA /* TableViewController.swift */,
+				7FA25F862420E034008BDED4 /* kpAliveSimple.swift */,
 				7F9213E52318CFF5001BE1E8 /* kpAlive.swift */,
 				7F9213E72318CFFB001BE1E8 /* eqEvent.swift */,
 				7F9213E92318D001001BE1E8 /* bootAsk.swift */,
@@ -498,6 +501,7 @@
 				7F9213EA2318D001001BE1E8 /* bootAsk.swift in Sources */,
 				7F06DD0E233F506600ADD354 /* dateCount.swift in Sources */,
 				7F934363238FCD62001A9690 /* zheHeish.iOSAppIndoor.xcdatamodeld in Sources */,
+				7FA25F872420E034008BDED4 /* kpAliveSimple.swift in Sources */,
 				7F1B35F223D6FA01008D60BA /* coreData.swift in Sources */,
 				7F00AFF5231BF77A004342C1 /* circularArray2.swift in Sources */,
 				7F1B35FA23EBF6F2008D60BA /* TableViewController.swift in Sources */,

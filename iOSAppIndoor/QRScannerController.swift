@@ -11,7 +11,7 @@ import AVFoundation
 import CoreData
 import Foundation
 
-let queue8 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
+
 var detectToken:Bool = false
 var token:String = ""
 var i = 0
