@@ -53,8 +53,8 @@ class logController: UIViewController {
         //log.text += "Accl = \(logAccl)"
         
         NotificationCenter.default.addObserver(self, selector: #selector(isPresentAccl(notification:)), name: NSNotification.Name("presentAccl") , object: nil)
-        totalAccl = 0.0
-        logAccl = 0.0
+        //totalAccl = 0.0
+        //logAccl = 0.0
         
     }
     @objc func isPresentAccl(notification: NSNotification) {
@@ -62,7 +62,8 @@ class logController: UIViewController {
             let meanAcclTime = Date()
             let presentmeanAcclTime = self.date2String(meanAcclTime)
             self.log.text += "Accl = \(logAccl) at \(presentmeanAcclTime)GMT＋08:00. \n"
-            
+            //reset the Accl value
+            totalAccl = 0.0
         }
     }
     public func date2String(_ date:Date, dateFormat:String = "yyyy-MM-dd HH:mm:ss") -> String {

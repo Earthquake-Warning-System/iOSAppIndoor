@@ -155,7 +155,7 @@ func startAcclUpdate(){
                             presentAccl = Array(repeating: 0.0, count: 50)
                             logAccl = totalAccl / 50.0
                             NotificationCenter.default.post(name: Notification.Name("presentAccl"), object: nil)
-                            
+                            //logAccl = 0.0
                         }
                         
                         if (isNotYetCorrected()) {
