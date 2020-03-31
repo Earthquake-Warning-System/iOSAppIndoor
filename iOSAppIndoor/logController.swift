@@ -25,6 +25,8 @@ class logController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        notRepeatDoing = false
+        
         if kpAliveTime != nil{
             let presentKpAliveTime = date2String(kpAliveTime!)
             print("kpAliveTimes is \(kpAliveCount) at \(presentKpAliveTime)" )

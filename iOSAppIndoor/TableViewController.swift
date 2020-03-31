@@ -17,7 +17,7 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        notRepeatDoing = false
         fetchData()
         
         // Uncomment the following line to preserve selection between presentations

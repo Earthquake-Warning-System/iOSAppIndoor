@@ -10,6 +10,7 @@ var timer2 = Timer()
 var timer3 = Timer()
 var timerToBackForeground : Timer?
 
+var notRepeatDoing = true
 var initialButton = false
 var callbackToDo = true
 var counterToForeground = 0.0
@@ -45,9 +46,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        notRepeatDoing = true
         // Do any additional setup after loading the view, typically from a nib.
-        timerToBackForeground = Timer.scheduledTimer(timeInterval:1, target:self, selector:#selector(self.prozessTimer), userInfo: nil, repeats: true)
-        timer3 = Timer.scheduledTimer(timeInterval:30, target: self, selector: #selector(self.shortKpAlive), userInfo: nil, repeats: true)
+        
+        
+        if notRepeatDoing{
+            notRepeatDoing = false
+            timerToBackForeground = Timer.scheduledTimer(timeInterval:1, target:self, selector:#selector(self.prozessTimer), userInfo: nil, repeats: true)
+            timer3 = Timer.scheduledTimer(timeInterval:30, target: self, selector: #selector(self.shortKpAlive), userInfo: nil, repeats: true)
+        }
+        
         
         UIApplication.shared.isIdleTimerDisabled = true
         lowPowerMode.isHidden = true
@@ -124,6 +132,8 @@ class ViewController: UIViewController {
                     }
                 }
                 
+                
+                
                 //Send shakingAlert packet to CS.
                 queue2.async{
                     while true{
@@ -159,7 +169,9 @@ class ViewController: UIViewController {
     }
     
     @objc func shortKpAlive(){
+        print("here")
         kpAliveSimple()
+        notRepeatDoing = true
     }
     
     //Fetch coredata
@@ -222,7 +234,11 @@ class ViewController: UIViewController {
         print("Shaking is detected.")
         DispatchQueue.main.async {
             self.presentForDetectingShaking.isHidden = false
-            timer2 = Timer.scheduledTimer(timeInterval:5 , target: self, selector: #selector(self.pressForCancelImage), userInfo: nil, repeats: true)
+            
+            if notRepeatDoing{
+                timer2 = Timer.scheduledTimer(timeInterval:5 , target: self, selector: #selector(self.pressForCancelImage), userInfo: nil, repeats: true)
+            }
+            
         }
     }
     
@@ -250,7 +266,11 @@ class ViewController: UIViewController {
             sendCorrectEqEvent = false
             print("Detection is true.")
             self.presentForReceivingingShaking.isHidden = false
-            timer2 = Timer.scheduledTimer(timeInterval:5 , target: self, selector: #selector(self.cancelImage), userInfo: nil, repeats: true)
+            
+            if notRepeatDoing{
+                timer2 = Timer.scheduledTimer(timeInterval:5 , target: self, selector: #selector(self.cancelImage), userInfo: nil, repeats: true)
+            }
+            
         }
     }
     

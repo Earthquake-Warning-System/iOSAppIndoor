@@ -51,6 +51,7 @@ class QRScannerController: UIViewController {
         super.viewDidLoad()
 
         // Get the back-facing camera for capturing videos
+        notRepeatDoing = false
         detectToken = false
         print(deviceToken)
         let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
