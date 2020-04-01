@@ -268,13 +268,10 @@ func startAcclUpdate(){
                                                     sendEqEvent = false
                                                 }
                                             }
-                                            //sleep(3)
-                                            //stopAlert()
                                         }
-                                        
-                                        //Not to repeat detection
-                                        treadDetect = false
                                     }
+                                    //Not to repeat detection
+                                    treadDetect = false
                                 }
                                 sumOfTurningPoint -= turningPointWindow.array[(turningPointWindow.writeIndex - 2) % turningPointWindow.array.count]!
                             }
