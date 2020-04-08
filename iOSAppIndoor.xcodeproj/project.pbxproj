@@ -42,6 +42,8 @@
 		7FB793FE23A7E7A3005661A6 /* image3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 7FB793FD23A7E7A2005661A6 /* image3.jpeg */; };
 		7FB7940023A7E7CE005661A6 /* image4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FB793FF23A7E7CE005661A6 /* image4.jpg */; };
 		7FB7940223A8C420005661A6 /* logController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB7940123A8C420005661A6 /* logController.swift */; };
+		7FC120ED243DD471006F54BD /* reqBSForNewCS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC120EC243DD471006F54BD /* reqBSForNewCS.swift */; };
+		7FC120F1243E0AD0006F54BD /* lowPowerImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FC120F0243E0ACF006F54BD /* lowPowerImage.jpg */; };
 		7FF0B7B42318BF13008F9CAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF0B7B32318BF13008F9CAA /* AppDelegate.swift */; };
 		7FF0B7BB2318BF1D008F9CAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FF0B7BA2318BF1D008F9CAA /* Assets.xcassets */; };
 		7FF0B7BE2318BF1D008F9CAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FF0B7BC2318BF1D008F9CAA /* LaunchScreen.storyboard */; };
@@ -104,6 +106,8 @@
 		7FB793FD23A7E7A2005661A6 /* image3.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image3.jpeg; sourceTree = "<group>"; };
 		7FB793FF23A7E7CE005661A6 /* image4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image4.jpg; sourceTree = "<group>"; };
 		7FB7940123A8C420005661A6 /* logController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logController.swift; sourceTree = "<group>"; };
+		7FC120EC243DD471006F54BD /* reqBSForNewCS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reqBSForNewCS.swift; sourceTree = "<group>"; };
+		7FC120F0243E0ACF006F54BD /* lowPowerImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lowPowerImage.jpg; sourceTree = "<group>"; };
 		7FF0B7B02318BF13008F9CAA /* iOSAppIndoor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSAppIndoor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FF0B7B32318BF13008F9CAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7FF0B7BA2318BF1D008F9CAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -197,6 +201,7 @@
 				7F1B35F923EBF6F2008D60BA /* TableViewController.swift */,
 				7FA25F862420E034008BDED4 /* kpAliveSimple.swift */,
 				7F9213E52318CFF5001BE1E8 /* kpAlive.swift */,
+				7FC120EC243DD471006F54BD /* reqBSForNewCS.swift */,
 				7F9213E72318CFFB001BE1E8 /* eqEvent.swift */,
 				7F9213E92318D001001BE1E8 /* bootAsk.swift */,
 				7F9213EB2318D008001BE1E8 /* kpAliveAck.swift */,
@@ -216,6 +221,7 @@
 				7F0C6E262351CA4F00FCE9F4 /* wiggle&dim.swift */,
 				7F9213FF2318D145001BE1E8 /* Interface.proto.swift */,
 				7F9213F52318D02F001BE1E8 /* Alert.mp3 */,
+				7FC120F0243E0ACF006F54BD /* lowPowerImage.jpg */,
 				7F1CB296239EB7FC001D784F /* image.jpg */,
 				7FB793FF23A7E7CE005661A6 /* image4.jpg */,
 				7FB793FD23A7E7A2005661A6 /* image3.jpeg */,
@@ -379,6 +385,7 @@
 				7FB7940023A7E7CE005661A6 /* image4.jpg in Resources */,
 				7FB793FE23A7E7A3005661A6 /* image3.jpeg in Resources */,
 				7F9213FC2318D02F001BE1E8 /* Alert.mp3 in Resources */,
+				7FC120F1243E0AD0006F54BD /* lowPowerImage.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,6 +501,7 @@
 				7F9213E62318CFF5001BE1E8 /* kpAlive.swift in Sources */,
 				7FB7940223A8C420005661A6 /* logController.swift in Sources */,
 				7F9213FB2318D02F001BE1E8 /* sendToBoot.swift in Sources */,
+				7FC120ED243DD471006F54BD /* reqBSForNewCS.swift in Sources */,
 				7F00AFF3231BF772004342C1 /* circularArray1.swift in Sources */,
 				7F1B35EC23D5F755008D60BA /* UserDefaults.swift in Sources */,
 				7F9213EC2318D008001BE1E8 /* kpAliveAck.swift in Sources */,

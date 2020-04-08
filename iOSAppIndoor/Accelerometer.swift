@@ -260,8 +260,12 @@ func startAcclUpdate(){
                                                         print("Detection is correct.")
                                                     }else{
                                                         //reset valueOfReliable
-                                                        valueOfReliable = 10
-                                                        print("Detection is incorrect.")
+                                                        if failSendingEqEvent{
+                                                            print("valueOfReliable does not be changed.")
+                                                        }else{
+                                                            valueOfReliable = 10
+                                                            print("Detection is incorrect.")
+                                                        }
                                                     }
                                                     //wait a minute to resend Eqevent.
                                                     sleep(55)

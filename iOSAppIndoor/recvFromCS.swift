@@ -14,13 +14,12 @@ var countCSResponse = 0
 
 //Function to receive packet to Country Server.
 public func recvCSKpalive(packetType: PacketType, recvProto: Data){
-        print(packetType.packetType)
-        let decodeData0 = try! KpAlive.parseFrom(data: recvProto as Data)
-        print(decodeData0)
-        getCSResponse = true
-        countCSResponse = 3
+    print(packetType.packetType)
+    let decodeData0 = try! KpAlive.parseFrom(data: recvProto as Data)
+    print(decodeData0)
+    getCSResponse = true
+    getNewCS = true
+    failSendingEqEvent = false
+    countCSResponse = 3
 }
-public func requestNewCS(){
-    bootAsk()
-    print("Reconnect with bootStrapServer/n")
-}
+

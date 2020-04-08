@@ -19,6 +19,7 @@ public func kpAliveAck(){
     switch sendDataToServer(proto: protoData5){
     case .success:
         print("Connect with countryServer")
+        getNewCS = true
     case .failure(let error):
         print("Client failed to send message5 to server: \(error)")
     }

@@ -31,7 +31,6 @@ let queue8 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var lowPowerMode: UILabel!
     @IBOutlet weak var QRCodeGen: UIButton!
     @IBOutlet weak var display: UIButton!
     @IBOutlet weak var illustration: UIButton!
@@ -42,6 +41,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var deleteTokens: UIButton!
     @IBOutlet weak var detectAccl: UISwitch!
     @IBOutlet weak var presentAcclStatus: UILabel!
+    @IBOutlet weak var lowPowerImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,16 +49,15 @@ class ViewController: UIViewController {
         notRepeatDoing = true
         // Do any additional setup after loading the view, typically from a nib.
         
-        
+        timerToBackForeground = Timer.scheduledTimer(timeInterval:1, target:self, selector:#selector(self.prozessTimer), userInfo: nil, repeats: true)
         if notRepeatDoing{
             notRepeatDoing = false
-            timerToBackForeground = Timer.scheduledTimer(timeInterval:1, target:self, selector:#selector(self.prozessTimer), userInfo: nil, repeats: true)
             timer3 = Timer.scheduledTimer(timeInterval:30, target: self, selector: #selector(self.shortKpAlive), userInfo: nil, repeats: true)
         }
         
         
         UIApplication.shared.isIdleTimerDisabled = true
-        lowPowerMode.isHidden = true
+        lowPowerImage.isHidden = true
         presentForDetectingShaking.isHidden = true
         presentForReceivingingShaking.isHidden = true
         
@@ -87,53 +86,18 @@ class ViewController: UIViewController {
         
         //Connect with Server
         queue0.async {
-            //connectToServer = true
+            //connectToBS = true
             if connectToServer == false{
                 connectToServer = true
-                bootAsk()
-                print("Connect with bootstrapServer")
-                let unpacket3 = recvDataFromBoot()
-                print(unpacket3.PacketType.packetType)
-                let decodeData3 = try! BootAsk.parseFrom(data: unpacket3.recvProto as Data)
-                print(decodeData3)
-                let countryServer = UDPClient(address: decodeData3.serverIp, port: decodeData3.serverPort)
-                CountryServer = countryServer
-                print(CountryServer.address,CountryServer.port)
-                kpAliveAck()
-                
+                reqBSForNewCS()
                 //kpAlive with CS
                 queue1.async {
                     while true{
-                        countCSResponse = 0
-                        getCSResponse = false
-                        while countCSResponse < 3{
-                            kpAlive()
-                            sleep(3)
-                            if getCSResponse{
-                                print("Receive countryServer response")
-                                countCSResponse = 3
-                            }else{
-                                countCSResponse += 1
-                            }
-                        }
-                        if getCSResponse{
-                            getNewCS = true
-                        }else{
-                            requestNewCS()
-                        }
-                        sleep(3)
-                        if getNewCS{
-                            getNewCS = false
-                        }else{
-                            print("Cannot connect with bootstrapServer")
-                            print("Please restart the application")
-                        }
+                        self.kpAliveWithCS()
                         sleep(UInt32(kpTime))
                     }
                 }
-                
-                
-                
+    
                 //Send shakingAlert packet to CS.
                 queue2.async{
                     while true{
@@ -169,9 +133,39 @@ class ViewController: UIViewController {
     }
     
     @objc func shortKpAlive(){
-        print("here")
         kpAliveSimple()
         notRepeatDoing = true
+    }
+    //kpAlive with CS
+    func kpAliveWithCS(){
+        countCSResponse = 0
+        getCSResponse = false
+        getNewCS = false
+        while countCSResponse < 3{
+            kpAlive()
+            sleep(3)
+            if getCSResponse{
+                print("Receive countryServer response")
+                countCSResponse = 3
+            }else{
+                countCSResponse += 1
+            }
+        }
+        //If getting no response from CS, request the new CS from BS.
+        if getCSResponse{
+            getNewCS = true
+        }else{
+            print("Reconnect with countryServer")
+            reqBSForNewCS()
+        }
+        sleep(3)
+        if getNewCS{
+            getNewCS = false
+        }else{
+            failSendingEqEvent = true
+            print("Cannot connect with bootstrapServer")
+            print("Please restart the application")
+        }
     }
     
     //Fetch coredata
@@ -284,7 +278,7 @@ class ViewController: UIViewController {
         counterToForeground += 1
         if counterToForeground > 30{
             background.isHidden = true
-            lowPowerMode.isHidden = false
+            lowPowerImage.isHidden = false
             deleteTokens.isHidden = true
             QRCodeGen.isHidden = true
             display.isHidden = true
@@ -292,12 +286,13 @@ class ViewController: UIViewController {
             illustration.isHidden = true
             presentLog.isHidden = true
             presentAcclStatus.isHidden = true
+            
             self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
         }else{
             presentLog.isHidden = false
             background.isHidden = false
             deleteTokens.isHidden = false
-            lowPowerMode.isHidden = true
+            lowPowerImage.isHidden = true
             QRCodeGen.isHidden = false
             display.isHidden = false
             presentAcclStatus.isHidden = false

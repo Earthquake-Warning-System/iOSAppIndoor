@@ -31,16 +31,16 @@ public func chooseProto(packetType: PacketType, recvProto: Data){
             l += 1
         }
         break
-    case "3":
+    /*case "3":
         let decodeData3 = try! BootAsk.parseFrom(data: recvProto as Data)
         print(decodeData3)
         getNewCS = true
         let countryServer = UDPClient(address: decodeData3.serverIp, port: decodeData3.serverPort)
         CountryServer = countryServer
         print(CountryServer.address,CountryServer.port)
-        kpAliveAck()
+        //kpAliveAck()
         print("Reconnect with countryServer/n")
-        break
+        break*/
     case "5":
         let decodeData5 = try! KpAliveAck.parseFrom(data: recvProto as Data)
         print(decodeData5)

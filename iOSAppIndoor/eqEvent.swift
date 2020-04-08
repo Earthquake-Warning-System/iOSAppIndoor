@@ -26,6 +26,7 @@ public func eqEvent(){
         print("Shake Occurring!")
         print("Client sent message1 to server.")
     case .failure(let error):
+        valueOfReliable = 100
         print("Client failed to send message1 to server: \(error)")
     }
 }

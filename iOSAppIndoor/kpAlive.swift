@@ -10,7 +10,7 @@ import Foundation
 import SwiftSocket
 
 let locale = Locale.current
-
+var failSendingEqEvent = false
 //kpAlivepacket to send Server.
 public func kpAlive(){
     let test = KpAlive.Builder()
@@ -26,6 +26,8 @@ public func kpAlive(){
         kpAliveCount += 1
         kpAliveTime = Date()
     case .failure(let error):
+        failSendingEqEvent = true
         print("Client failed to send message0 to server: \(error)")
+        
     }
 }

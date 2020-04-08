@@ -18,6 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" image="lowPowerImage.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Lrb-W2-HJS">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <viewLayoutGuide key="safeArea" id="OUo-eo-WLV"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="image.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="79k-Sw-915">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <viewLayoutGuide key="safeArea" id="6ld-MS-r2Q"/>
@@ -84,16 +89,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Low Power Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2TG-jY-4BD">
-                                <rect key="frame" x="112.5" y="308.5" width="150" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="u70-cn-iZB"/>
-                                    <constraint firstAttribute="height" constant="50" id="vpW-tr-hVu"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image3.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="iA3-n9-3iW">
                                 <rect key="frame" x="72.5" y="149.5" width="230" height="128"/>
                                 <constraints>
@@ -174,7 +169,6 @@
                             <constraint firstItem="8Gd-u6-wuH" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="250" id="2yo-Nz-g3l"/>
                             <constraint firstItem="j7a-zl-uhO" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-250" id="9rE-hc-0yB"/>
                             <constraint firstItem="onB-N1-6bz" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="160" id="AgM-Nw-XUs"/>
-                            <constraint firstItem="2TG-jY-4BD" firstAttribute="centerX" secondItem="Rby-rd-j46" secondAttribute="centerX" id="EoW-te-9Zh"/>
                             <constraint firstItem="NY7-Dv-KsT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Eyz-gc-d4r"/>
                             <constraint firstItem="gkB-30-pxo" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="80" id="F8L-qQ-3yw"/>
                             <constraint firstItem="Xhj-1a-dOY" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="30" id="H3g-CO-d3M"/>
@@ -186,7 +180,6 @@
                             <constraint firstItem="Xhj-1a-dOY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SOG-9l-WGm"/>
                             <constraint firstItem="iA3-n9-3iW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YgC-16-KVF"/>
                             <constraint firstItem="79k-Sw-915" firstAttribute="bottom" secondItem="Rby-rd-j46" secondAttribute="bottom" id="b7s-Yk-YYj"/>
-                            <constraint firstItem="2TG-jY-4BD" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="cG4-uN-QUu"/>
                             <constraint firstItem="onB-N1-6bz" firstAttribute="centerX" secondItem="Rby-rd-j46" secondAttribute="centerX" constant="70" id="dKx-Z2-sex"/>
                             <constraint firstItem="79k-Sw-915" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="e5c-8e-KF5"/>
                             <constraint firstItem="iA3-n9-3iW" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-120" id="lfy-z0-pP4"/>
@@ -204,7 +197,7 @@
                         <outlet property="detectAccl" destination="gkB-30-pxo" id="MH2-OM-86I"/>
                         <outlet property="display" destination="8Gd-u6-wuH" id="WVP-da-ToP"/>
                         <outlet property="illustration" destination="eCh-oM-Bjw" id="iQt-fH-sE0"/>
-                        <outlet property="lowPowerMode" destination="2TG-jY-4BD" id="aoh-xO-SCA"/>
+                        <outlet property="lowPowerImage" destination="Lrb-W2-HJS" id="f8o-wb-8Bn"/>
                         <outlet property="presentAcclStatus" destination="Xhj-1a-dOY" id="73Y-mc-DOu"/>
                         <outlet property="presentForDetectingShaking" destination="iA3-n9-3iW" id="a94-Lo-w7Y"/>
                         <outlet property="presentForReceivingingShaking" destination="NY7-Dv-KsT" id="aby-1A-RGr"/>
@@ -563,8 +556,10 @@ It will receive notification from EEWSIndoor.</string>
         <image name="image.jpg" width="867" height="1300"/>
         <image name="image3.jpeg" width="264" height="191"/>
         <image name="image4.jpg" width="600" height="724"/>
+        <image name="lowPowerImage.jpg" width="2048" height="2048"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="XRH-je-CjM"/>
         <segue reference="aWt-rd-kdm"/>
     </inferredMetricsTieBreakers>
 </document>
