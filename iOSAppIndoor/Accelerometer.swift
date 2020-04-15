@@ -200,7 +200,7 @@ func startAcclUpdate(){
                                             }else if thisLaunchFirstDetect{
                                                 print("thisLaunchFirstDetect")
                                                 //fetchCoreData()
-                                                print(LastEqTime as Any)
+                                                //print(LastEqTime as Any)
                                                 if LastEqTime == nil{
                                                     LastEqTime = Date()
                                                     let secdate = LastEqTime!.timeIntervalSince1970 + 28800
@@ -244,7 +244,6 @@ func startAcclUpdate(){
                                                 stopAlert()
                                             }
                                             
-                                            //presentEqImage = true
                                             NotificationCenter.default.post(name: Notification.Name("presentEqImage"), object: nil)
                                             
                                             //To do something after sendEqEvent

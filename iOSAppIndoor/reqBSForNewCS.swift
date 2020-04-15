@@ -18,5 +18,5 @@ public func reqBSForNewCS(){
     let countryServer = UDPClient(address: decodeData3.serverIp, port: decodeData3.serverPort)
     CountryServer = countryServer
     print(CountryServer.address,CountryServer.port)
-    kpAlive()
+    
 }

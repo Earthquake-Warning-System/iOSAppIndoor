@@ -183,6 +183,10 @@ extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
                     print(iPhoneName)
                     print(deviceToken)
                     self.addToken(Token: token)
+                    let controller = UIAlertController(title: "Scan finished", message: "Press the X to turn back", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    controller.addAction(okAction)
+                    present(controller, animated: true, completion: nil)
                     detectToken = true
                 }
             }

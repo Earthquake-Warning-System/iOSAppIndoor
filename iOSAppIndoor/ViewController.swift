@@ -157,6 +157,7 @@ class ViewController: UIViewController {
         }else{
             print("Reconnect with countryServer")
             reqBSForNewCS()
+            kpAlive()
         }
         sleep(3)
         if getNewCS{
