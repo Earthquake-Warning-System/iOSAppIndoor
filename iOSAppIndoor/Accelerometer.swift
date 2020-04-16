@@ -63,6 +63,7 @@ var startDetecting = 0
 var xAccl = 0
 var yAccl = 0
 var zAccl = 0
+var acclDerection = ""
 
 //stop detecing
 func stopAcclUpdate(){
@@ -95,49 +96,63 @@ func startAcclUpdate(){
                 if (testAccl.xAccl < 12 && testAccl.xAccl > 7){
                     oriAccZ = testAccl.xAccl
                     xAccl = 1
+                    acclDerection = "x"
                 }else if (testAccl.yAccl < 12 && testAccl.yAccl > 7){
                     oriAccZ = testAccl.yAccl
                     yAccl = 1
+                    acclDerection = "y"
                 }else if (testAccl.zAccl < 12 && testAccl.zAccl > 7){
                     oriAccZ = testAccl.zAccl
                     zAccl = 1
+                    acclDerection = "z"
                 }else{
                     detectoblique = true
                     print("Place the phone without moving.")
                     NotificationCenter.default.post(name: Notification.Name("humanTouch"), object: nil)
-                    stopAcclUpdate()
+                    //stopAcclUpdate()
+                    sleep(10)
                     detectoblique = false
                 }
-                if xAccl == 1{
+                
+                switch acclDerection{
+                case "x":
                     if testAccl.yAccl < -0.5 && testAccl.yAccl > 0.5{
                         print("Place the phone without moving.")
                         NotificationCenter.default.post(name: Notification.Name("humanTouch"), object: nil)
-                        stopAcclUpdate()
+                        //stopAcclUpdate()
+                        sleep(10)
                     }else if testAccl.zAccl <  -0.5 && testAccl.zAccl > 0.5{
                         print("Place the phone without moving.")
                         NotificationCenter.default.post(name: Notification.Name("humanTouch"), object: nil)
-                        stopAcclUpdate()
+                        //stopAcclUpdate()
+                        sleep(10)
                     }
-                }else if yAccl == 1{
+                case "y":
                     if testAccl.xAccl <  -0.5 && testAccl.xAccl > 0.5{
                         print("Place the phone without moving.")
                         NotificationCenter.default.post(name: Notification.Name("humanTouch"), object: nil)
-                        stopAcclUpdate()
+                        //stopAcclUpdate()
+                        sleep(10)
                     }else if testAccl.zAccl <  -0.5 && testAccl.zAccl > 0.5{
                         print("Place the phone without moving.")
                         NotificationCenter.default.post(name: Notification.Name("humanTouch"), object: nil)
-                        stopAcclUpdate()
+                        //stopAcclUpdate()
+                        sleep(10)
                     }
-                }else if zAccl == 1{
+                case "z":
                     if testAccl.xAccl <  -0.5 && testAccl.xAccl > 0.5{
                         print("Place the phone without moving.")
                         NotificationCenter.default.post(name: Notification.Name("humanTouch"), object: nil)
-                        stopAcclUpdate()
+                        //stopAcclUpdate()
+                        sleep(10)
                     }else if testAccl.yAccl <  -0.5 && testAccl.yAccl > 0.5{
                         print("Place the phone without moving.")
                         NotificationCenter.default.post(name: Notification.Name("humanTouch"), object: nil)
-                        stopAcclUpdate()
+                        //stopAcclUpdate()
+                        sleep(10)
                     }
+                default:
+                    print(error!)
                 }
                 
                 //prepare Accl to present in log
@@ -155,7 +170,6 @@ func startAcclUpdate(){
                             presentAccl = Array(repeating: 0.0, count: 50)
                             logAccl = totalAccl / 50.0
                             NotificationCenter.default.post(name: Notification.Name("presentAccl"), object: nil)
-                            //logAccl = 0.0
                         }
                         
                         if (isNotYetCorrected()) {
@@ -180,76 +194,72 @@ func startAcclUpdate(){
                             sumOfTurningPoint += turningPointOfCurrent
                             if (isCircularFull()) {
                                 let estimatedValue = getEstimatedValue()
-                                print(estimatedValue)
-                                if(treadDetect == false){
-                                    treadDetect = true
+                                //print(estimatedValue)
                                     queue6.async{
                                         if (isEqOccur(estimatedValue: estimatedValue)) {
-                                            if isFirstDetect{
-                                                print("isFirstLaunch")
-                                                valueOfReliable = 100
-                                                LastEqTime = Date()
-                                                print(LastEqTime as Any)
-                                                let secdate = LastEqTime!.timeIntervalSince1970 + 28800
-                                                let x = Int(secdate)
-                                                let y  = (secdate - Double(x)) * 1000000
-                                                SecEqTime = x
-                                                print(SecEqTime as Any)
-                                                uSecEqTime = y
-                                                print(uSecEqTime as Any)
-                                            }else if thisLaunchFirstDetect{
-                                                print("thisLaunchFirstDetect")
-                                                //fetchCoreData()
-                                                //print(LastEqTime as Any)
-                                                if LastEqTime == nil{
+                                            if(treadDetect == false){
+                                                treadDetect = true
+                                                if isFirstDetect{
+                                                    print("isFirstLaunch")
+                                                    valueOfReliable = 100
                                                     LastEqTime = Date()
+                                                    print(LastEqTime as Any)
                                                     let secdate = LastEqTime!.timeIntervalSince1970 + 28800
                                                     let x = Int(secdate)
                                                     let y  = (secdate - Double(x)) * 1000000
                                                     SecEqTime = x
+                                                    print(SecEqTime as Any)
                                                     uSecEqTime = y
-                                                    valueOfReliable = 50
+                                                    print(uSecEqTime as Any)
+                                                }else if thisLaunchFirstDetect{
+                                                    print("thisLaunchFirstDetect")
+                                                    if LastEqTime == nil{
+                                                        LastEqTime = Date()
+                                                        let secdate = LastEqTime!.timeIntervalSince1970 + 28800
+                                                        let x = Int(secdate)
+                                                        let y  = (secdate - Double(x)) * 1000000
+                                                        SecEqTime = x
+                                                        uSecEqTime = y
+                                                        valueOfReliable = 50
+                                                    }else{
+                                                        let secdate = LastEqTime!.timeIntervalSince1970 + 28800
+                                                        let x = Int(secdate)
+                                                        let y  = (secdate - Double(x)) * 1000000
+                                                        SecEqTime = x
+                                                        uSecEqTime = y
+                                                        EqTime = Date()
+                                                        dateCount(eqTime: EqTime, lastEqTime: LastEqTime)
+                                                        LastEqTime = EqTime
+                                                    }
+                                                }
+                                                else if lastSendCorrectEqEvent{
+                                                    print("lastSendCorrectEqEvent")
+                                                    lastSendCorrectEqEvent = false
+                                                    valueOfReliable = 100
                                                 }else{
-                                                    let secdate = LastEqTime!.timeIntervalSince1970 + 28800
+                                                    print("recountReliability")
+                                                    EqTime = Date()
+                                                    print(EqTime as Any)
+                                                    let secdate = EqTime!.timeIntervalSince1970 + 28800
                                                     let x = Int(secdate)
                                                     let y  = (secdate - Double(x)) * 1000000
                                                     SecEqTime = x
                                                     uSecEqTime = y
-                                                    EqTime = Date()
                                                     dateCount(eqTime: EqTime, lastEqTime: LastEqTime)
                                                     LastEqTime = EqTime
                                                 }
-                                            }
-                                            else if lastSendCorrectEqEvent{
-                                                print("lastSendCorrectEqEvent")
-                                                lastSendCorrectEqEvent = false
-                                                valueOfReliable = 100
-                                            }else{
-                                                print("recountReliability")
-                                                EqTime = Date()
-                                                print(EqTime as Any)
-                                                let secdate = EqTime!.timeIntervalSince1970 + 28800
-                                                let x = Int(secdate)
-                                                let y  = (secdate - Double(x)) * 1000000
-                                                SecEqTime = x
-                                                uSecEqTime = y
-                                                dateCount(eqTime: EqTime, lastEqTime: LastEqTime)
-                                                LastEqTime = EqTime
-                                            }
-                                            isFirstDetect = false
-                                            thisLaunchFirstDetect = false
-                                            queue7.async {
+                                                
+                                                isFirstDetect = false
+                                                thisLaunchFirstDetect = false
                                                 Alert()
-                                                sleep(3)
-                                                stopAlert()
-                                            }
-                                            
-                                            NotificationCenter.default.post(name: Notification.Name("presentEqImage"), object: nil)
-                                            
-                                            //To do something after sendEqEvent
-                                            if sendEqEvent == false{
-                                                sendEqEvent = true
-                                                queue5.async {
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+                                                    stopAlert()
+                                                })
+                                                NotificationCenter.default.post(name: Notification.Name("presentEqImage"), object: nil)
+                                                
+                                                //To do something after sendEqEvent
+                                                if sendEqEvent == false{
+                                                    sendEqEvent = true
                                                     eqEvent()
                                                     sleep(5)
                                                     if sendCorrectEqEvent{
@@ -266,17 +276,19 @@ func startAcclUpdate(){
                                                             print("Detection is incorrect.")
                                                         }
                                                     }
-                                                    //wait a minute to resend Eqevent.
-                                                    sleep(55)
-                                                    sendEqEvent = false
+                                                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(55), execute: {
+                                                        sendEqEvent = false
+                                                        treadDetect = false
+                                                    })
+                                                    
                                                 }
+                                                updateData()
                                             }
                                         }
+                                    
                                     }
                                     //Not to repeat detection
-                                    treadDetect = false
-                                }
-                                sumOfTurningPoint -= turningPointWindow.array[(turningPointWindow.writeIndex - 2) % turningPointWindow.array.count]!
+                            sumOfTurningPoint -= turningPointWindow.array[(turningPointWindow.writeIndex - 2) % turningPointWindow.array.count]!
                             }
                         }
                     }

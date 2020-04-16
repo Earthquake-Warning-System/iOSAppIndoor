@@ -226,14 +226,9 @@ class ViewController: UIViewController {
     
     //Receive callback to present alert images.
     @objc func isPresentEqImage(notification: NSNotification) {
-        print("Shaking is detected.")
         DispatchQueue.main.async {
             self.presentForDetectingShaking.isHidden = false
-            
-            if notRepeatDoing{
-                timer2 = Timer.scheduledTimer(timeInterval:5 , target: self, selector: #selector(self.pressForCancelImage), userInfo: nil, repeats: true)
-            }
-            
+            timer2 = Timer.scheduledTimer(timeInterval:5 , target: self, selector: #selector(self.pressForCancelImage), userInfo: nil, repeats: false)
         }
     }
     
@@ -261,11 +256,7 @@ class ViewController: UIViewController {
             sendCorrectEqEvent = false
             print("Detection is true.")
             self.presentForReceivingingShaking.isHidden = false
-            
-            if notRepeatDoing{
-                timer2 = Timer.scheduledTimer(timeInterval:5 , target: self, selector: #selector(self.cancelImage), userInfo: nil, repeats: true)
-            }
-            
+            timer2 = Timer.scheduledTimer(timeInterval:5 , target: self, selector: #selector(self.cancelImage), userInfo: nil, repeats: true)
         }
     }
     
@@ -313,7 +304,6 @@ class ViewController: UIViewController {
                 DispatchQueue.main.async {
                     startAcclUpdate()
                 }
-                print("time1：", Date())
                 if detecting == false{
                     detecting = true
                     self.display.setTitle("Wait..", for: .normal)
@@ -321,7 +311,6 @@ class ViewController: UIViewController {
                     self.display.dim()
                     self.display.wiggle()
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 7) {
-                        print("time2：", Date())
                         self.display.setTitle("On", for: .normal)
                         self.display.backgroundColor = UIColor.init(red: 54/255.0, green: 244/255.0, blue: 60/255.0, alpha: 0.65)
                         self.display.dim()
