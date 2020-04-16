@@ -15,9 +15,7 @@ import CoreData
 var player: AVPlayer?
 
 let queue4 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
-let queue5 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
 let queue6 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
-let queue7 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
 
 var LastEqTime: Date? = nil
 var EqTime: Date? = nil
@@ -182,11 +180,16 @@ func startAcclUpdate(){
                             }
                             if (averageAccZWindow.Size == 0) {
                                 averageAccZWindow.write(accZ - correctedAccZ)
-                            }else {
+                            }else if (averageAccZWindow.writeIndex>50){
                                 averageAccZWindow.write((7.0 / 8) * averageAccZWindow.array[(averageAccZWindow.writeIndex - 1) % averageAccZWindow.array.count]! + (1.0 / 8) * (accZ - correctedAccZ))
+                                if(averageAccZWindow.writeIndex>53){
+                                    averageAccZWindow.writeIndex = 3
+                                }
+                            }
+                            else {
+                                averageAccZWindow.write((7.0 / 8) * averageAccZWindow.array[(averageAccZWindow.writeIndex - 1)]! + (1.0 / 8) * (accZ - correctedAccZ))
                             }
                         }
-                        
                         //Detect the unusual Accl
                         if (isTurningPoint()) {
                             turningPointOfCurrent = winOfLast1st

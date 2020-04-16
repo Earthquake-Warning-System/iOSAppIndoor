@@ -5,14 +5,12 @@ import ProtocolBuffers
 import SwiftProtobuf
 import CoreData
 
-var timer1 = Timer()
 var timer2 = Timer()
 var timer3 = Timer()
 var timerToBackForeground : Timer?
 
 var notRepeatDoing = true
 var initialButton = false
-var callbackToDo = true
 var counterToForeground = 0.0
 var detecting:Bool = false
 var pressStartDetect:Bool = false
@@ -27,7 +25,6 @@ let queue0 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
 let queue1 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
 let queue2 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
 let queue3 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
-let queue8 = DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
 
 class ViewController: UIViewController {
     
@@ -90,6 +87,7 @@ class ViewController: UIViewController {
             if connectToServer == false{
                 connectToServer = true
                 reqBSForNewCS()
+                
                 //kpAlive with CS
                 queue1.async {
                     while true{
@@ -245,7 +243,17 @@ class ViewController: UIViewController {
             self.presentAcclStatus.text = "Detect humanTouch"
             self.display.dim()
             self.display.wiggle()
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10), execute: {
+                startAcclUpdate()
+                self.detectAccl.setOn(true, animated: true)
+                self.display.setTitle("On", for: .normal)
+                self.display.backgroundColor = UIColor.init(red: 54/255.0, green: 244/255.0, blue: 60/255.0, alpha: 0.65)
+                self.presentAcclStatus.text = "Detect humanTouch"
+                self.display.dim()
+                self.display.wiggle()
+            })
         }
+        
     }
     
     //Cancel detection Image
@@ -263,6 +271,11 @@ class ViewController: UIViewController {
     
     @objc func cancelImage(){
         self.presentForReceivingingShaking.isHidden = true
+    }
+    
+    @objc func kpToCS(){
+        print("here")
+        //self.kpAliveWithCS()
     }
     
     //switch fore and background
