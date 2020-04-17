@@ -225,6 +225,7 @@ class ViewController: UIViewController {
     //Receive callback to present alert images.
     @objc func isPresentEqImage(notification: NSNotification) {
         DispatchQueue.main.async {
+            updateData()
             self.presentForDetectingShaking.isHidden = false
             timer2 = Timer.scheduledTimer(timeInterval:5 , target: self, selector: #selector(self.pressForCancelImage), userInfo: nil, repeats: false)
         }
@@ -244,6 +245,7 @@ class ViewController: UIViewController {
             self.display.dim()
             self.display.wiggle()
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10), execute: {
+                pressStartDetect = true
                 startAcclUpdate()
                 self.detectAccl.setOn(true, animated: true)
                 self.display.setTitle("On", for: .normal)
@@ -268,14 +270,8 @@ class ViewController: UIViewController {
         }
     }
     
-    
     @objc func cancelImage(){
         self.presentForReceivingingShaking.isHidden = true
-    }
-    
-    @objc func kpToCS(){
-        print("here")
-        //self.kpAliveWithCS()
     }
     
     //switch fore and background

@@ -12,6 +12,7 @@ public struct CircularArray1<T> {
     public var array: [T?]
     public var readIndex = 0
     public var writeIndex = 0
+    public var tailIndex = 49
     public var Size = 0
     
     public init(count: Int) {
@@ -23,7 +24,7 @@ public struct CircularArray1<T> {
         if(Size < 3){
             Size += 1
         }
-        writeIndex += 1
+        writeIndex = (writeIndex + 1) % array.count
     }
     
     public mutating func read() -> T? {
