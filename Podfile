@@ -7,8 +7,8 @@ target 'iOSAppIndoor' do
 
   # Pods for iOSAppIndoor
   pod 'ProtocolBuffers-Swift'
-  pod 'SwiftProtobuf'
   pod 'SwiftSocket'
+  # pod 'SwiftProtobuf', '~> 1.0'
 
 
 

@@ -30,6 +30,7 @@ var detectoblique:Bool? = false
 let timeInterval: TimeInterval = 0.02
 var presentAccl = Array(repeating: 0.0, count: 50)
 var acclCount = 0
+var totalAccl = 0.0
 
 private let countOfCorrected = 300
 private let thresholdFactor = 0.012
@@ -38,16 +39,11 @@ private let windowSizesForTurningPoint = 25
 
 var correctSample = 0
 var correctedAccZ = 0.0
-var averageAccZWindow = CircularArray1<Double>(count: windowSizesForAvgAccZ)
-var turningPointWindow = CircularArray2<Double>(count: windowSizesForTurningPoint)
-
 var winOfCurrent = 0.0
 var winOfLast1st = 0.0
 var winOfLast2nd = 0.0
-
 var turningPointOfCurrent = 0.0
 var sumOfTurningPoint = 0.0
-
 var eqThreshold = 0.0
 var motionManager = CMMotionManager()
 
@@ -64,32 +60,45 @@ var zAccl = 0
 var acclDerection = ""
 
 //stop detecing
-func stopAcclUpdate(){
+func stopAcclUpdate(averageAccZWindow: CircularArray1<Double>, turningPointWindow: CircularArray2<Double>){
     motionManager.stopAccelerometerUpdates()
+    //print(averageAccZWindow)
+    //print(turningPointWindow)
+    /*averageAccZWindow = CircularArray1<Double>(count: windowSizesForAvgAccZ)
+    averageAccZWindow.readIndex = 0
+    averageAccZWindow.writeIndex = 0
+    averageAccZWindow.tailIndex = 49
+    averageAccZWindow.Size = 0
+    averageAccZWindow.array = [Double](repeating: 0.0, count: 50)
+    print(averageAccZWindow)*/
 }
 
 //start detecting
 func startAcclUpdate(){
-        guard motionManager.isAccelerometerAvailable else {
-            print("The device  cannot support the function.")
-            return
-        }
+    var averageAccZWindow = CircularArray1<Double>(count: windowSizesForAvgAccZ)
+    var turningPointWindow = CircularArray2<Double>(count: windowSizesForTurningPoint)
+    
+    guard motionManager.isAccelerometerAvailable else {
+        print("The device  cannot support the function.")
+        return
+    }
+    
+    if pressStartDetect{
         print("Place your device without moving")
         motionManager.accelerometerUpdateInterval = timeInterval
         eqThreshold = sqrt(thresholdFactor)
-    let quene = OperationQueue.current
-    motionManager.startAccelerometerUpdates(to: quene!, withHandler: {(acclData, error) in
-        guard error == nil else {
-            print(error!)
-            return
-        }
-        var oriAccZ = 0.0
-        var testAccl = Accl()
-        testAccl.xAccl = abs((acclData!.acceleration.x) * 10)
-        testAccl.yAccl = abs((acclData!.acceleration.y) * 10)
-        testAccl.zAccl = abs((acclData!.acceleration.z) * 10)
         
-        queue4.async{
+        let quene = OperationQueue.current
+        motionManager.startAccelerometerUpdates(to: quene!, withHandler: {(acclData, error) in
+            guard error == nil else {
+                print(error!)
+                return
+            }
+            var oriAccZ = 0.0
+            var testAccl = Accl()
+            testAccl.xAccl = abs((acclData!.acceleration.x) * 10)
+            testAccl.yAccl = abs((acclData!.acceleration.y) * 10)
+            testAccl.zAccl = abs((acclData!.acceleration.z) * 10)
             if detectoblique == false{
                 if (testAccl.xAccl < 12 && testAccl.xAccl > 7){
                     oriAccZ = testAccl.xAccl
@@ -167,7 +176,7 @@ func startAcclUpdate(){
                             }
                             presentAccl = Array(repeating: 0.0, count: 50)
                             logAccl = totalAccl / 50.0
-                            totalAccl = 0
+                            totalAccl = 0.0
                             NotificationCenter.default.post(name: Notification.Name("presentAccl"), object: nil)
                         }
                         
@@ -183,69 +192,81 @@ func startAcclUpdate(){
                                 averageAccZWindow.write(accZ - correctedAccZ)
                             }else {
                                 if (averageAccZWindow.writeIndex  == 0){
-                                    averageAccZWindow.write((7.0 / 8) * averageAccZWindow.array[(averageAccZWindow.tailIndex)]! + (1.0 / 8) * (accZ - correctedAccZ))
+                                    let lastIndex = (7.0 / 8) * averageAccZWindow.array[(averageAccZWindow.tailIndex)]!
+                                    let currentIndex = (1.0 / 8) * (accZ - correctedAccZ)
+                                    averageAccZWindow.write(lastIndex + currentIndex)
                                 }else{
-                                    averageAccZWindow.write((7.0 / 8) * averageAccZWindow.array[(averageAccZWindow.writeIndex - 1)]! + (1.0 / 8) * (accZ - correctedAccZ))
+                                    let lastIndex = (7.0 / 8) * averageAccZWindow.array[(averageAccZWindow.writeIndex - 1)]!
+                                    let currentIndex = (1.0 / 8) * (accZ - correctedAccZ)
+                                    averageAccZWindow.write(lastIndex + currentIndex)
                                 }
                             }
                         }
                         //Detect the unusual Accl
-                        if (isTurningPoint()) {
+                        if (isTurningPoint(averageAccZWindow: averageAccZWindow)) {
                             turningPointOfCurrent = winOfLast1st
                             turningPointWindow.write(turningPointOfCurrent)
                             sumOfTurningPoint += turningPointOfCurrent
-                            if (isCircularFull()) {
+                            if (isCircularFull(turningPointWindow: turningPointWindow)) {
                                 let estimatedValue = getEstimatedValue()
                                 //print(estimatedValue)
-                                    queue6.async{
+                                queue6.async{
+                                    if(treadDetect == false){
+                                        treadDetect = true
                                         if (isEqOccur(estimatedValue: estimatedValue)) {
-                                            if(treadDetect == false){
-                                                treadDetect = true
-                                                whichTypeDetect()
-                                                Alert()
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
-                                                    stopAlert()
-                                                })
-                                                NotificationCenter.default.post(name: Notification.Name("presentEqImage"), object: nil)
-                                                
-                                                //To do something after sendEqEvent
-                                                if sendEqEvent == false{
-                                                    sendEqEvent = true
-                                                    eqEvent()
-                                                    sleep(5)
-                                                    if sendCorrectEqEvent{
-                                                        lastSendCorrectEqEvent = true
-                                                        //restore valueOfReliable
-                                                        valueOfReliable = 100
-                                                        print("Detection is correct.")
+                                            Alert()
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+                                                stopAlert()
+                                            })
+                                            NotificationCenter.default.post(name: Notification.Name("presentEqImage"), object: nil)
+                                            whichTypeDetect()
+                                            
+                                            //To do something after sendEqEvent
+                                            if sendEqEvent == false{
+                                                sendEqEvent = true
+                                                eqEvent()
+                                                sleep(5)
+                                                if sendCorrectEqEvent{
+                                                    lastSendCorrectEqEvent = true
+                                                    //restore valueOfReliable
+                                                    valueOfReliable = 100
+                                                    print("Detection is correct.")
+                                                }else{
+                                                    //reset valueOfReliable
+                                                    if failSendingEqEvent{
+                                                        print("valueOfReliable does not be changed.")
                                                     }else{
-                                                        //reset valueOfReliable
-                                                        if failSendingEqEvent{
-                                                            print("valueOfReliable does not be changed.")
-                                                        }else{
-                                                            valueOfReliable = 10
-                                                            print("Detection is incorrect.")
-                                                        }
+                                                        valueOfReliable = 10
+                                                        print("Detection is incorrect.")
                                                     }
-                                                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(55), execute: {
-                                                        sendEqEvent = false
-                                                        treadDetect = false
-                                                    })
-                                                    
                                                 }
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(55), execute: {
+                                                    sendEqEvent = false
+                                                    
+                                                })
+                                                
                                             }
                                         }
-                                    
+                                        treadDetect = false
                                     }
-                                    //Not to repeat detection
-                            sumOfTurningPoint -= turningPointWindow.array[(turningPointWindow.writeIndex - 2) % turningPointWindow.array.count]!
+                                    
+                                }
+                                //Not to repeat detection
+                                sumOfTurningPoint -= turningPointWindow.array[(turningPointWindow.writeIndex - 2) % turningPointWindow.array.count]!
                             }
                         }
                     }
                 }
             }
-        }
-    })
+            //queue4.async{
+            
+            //}
+        })
+    }else{
+        stopAcclUpdate(averageAccZWindow: averageAccZWindow, turningPointWindow: turningPointWindow)
+    }
+    
+    
 }
 
 func isNotYetCorrected()->Bool{
@@ -260,7 +281,7 @@ func correctionSensor(currAccZ: Double) {
     correctSample += 1
     correctedAccZ = correctedAccZ + (currAccZ / Double(countOfCorrected))
 }
-func isTurningPoint() -> Bool {
+func isTurningPoint(averageAccZWindow: CircularArray1<Double>) -> Bool {
     if (averageAccZWindow.Size < 3) {
         return false
     }
@@ -295,7 +316,7 @@ func isSmallerPoint()->Bool{
         return false
     }
 }
-func isCircularFull()->Bool{
+func isCircularFull(turningPointWindow: CircularArray2<Double>)->Bool{
     if(turningPointWindow.Size == windowSizesForTurningPoint){
         return true
     }else{
@@ -388,4 +409,7 @@ func whichTypeDetect(){
     isFirstDetect = false
     thisLaunchFirstDetect = false
 }
-
+class CircularArray{
+    //static var averageAccZWindow = CircularArray1<Double>(count: windowSizesForAvgAccZ)
+    //static var turningPointWindow = CircularArray2<Double>(count: windowSizesForTurningPoint)
+}

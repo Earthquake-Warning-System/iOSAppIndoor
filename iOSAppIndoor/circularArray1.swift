@@ -16,11 +16,13 @@ public struct CircularArray1<T> {
     public var Size = 0
     
     public init(count: Int) {
-        array = [T?](repeating: nil, count: count)
+        array = [T?](repeating: nil, count: 50)
     }
     
     public mutating func write(_ element: T) {
-        array[writeIndex % array.count] = element
+        var theWriteIndex = 0
+        theWriteIndex = writeIndex % array.count
+        array[theWriteIndex] = element
         if(Size < 3){
             Size += 1
         }

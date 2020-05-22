@@ -2,7 +2,7 @@ import UIKit
 import AVFoundation
 import SwiftSocket
 import ProtocolBuffers
-import SwiftProtobuf
+//import SwiftProtobuf
 import CoreData
 
 var timer2 = Timer()
@@ -81,13 +81,15 @@ class ViewController: UIViewController {
         fetchToken()
         fetchCoreData()
         
+        
+        
         //Connect with Server
         queue0.async {
             //connectToBS = true
             if connectToServer == false{
                 connectToServer = true
-                reqBSForNewCS()
                 
+                reqBSForNewCS()
                 //kpAlive with CS
                 queue1.async {
                     while true{
@@ -153,7 +155,6 @@ class ViewController: UIViewController {
         if getCSResponse{
             getNewCS = true
         }else{
-            print("Reconnect with countryServer")
             reqBSForNewCS()
             kpAlive()
         }
@@ -236,7 +237,8 @@ class ViewController: UIViewController {
         print("Alert is humanTouch.")
         pressStartDetect = false
         DispatchQueue.main.async {
-            stopAcclUpdate()
+            //stopAcclUpdate()
+            startAcclUpdate()
             print("Already stop detecting")
             self.detectAccl.setOn(false, animated: true)
             self.display.setTitle("Off", for: .normal)
@@ -244,16 +246,6 @@ class ViewController: UIViewController {
             self.presentAcclStatus.text = "Detect humanTouch"
             self.display.dim()
             self.display.wiggle()
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10), execute: {
-                pressStartDetect = true
-                startAcclUpdate()
-                self.detectAccl.setOn(true, animated: true)
-                self.display.setTitle("On", for: .normal)
-                self.display.backgroundColor = UIColor.init(red: 54/255.0, green: 244/255.0, blue: 60/255.0, alpha: 0.65)
-                self.presentAcclStatus.text = "Detect humanTouch"
-                self.display.dim()
-                self.display.wiggle()
-            })
         }
         
     }
@@ -307,6 +299,7 @@ class ViewController: UIViewController {
         if sender.isOn == true{
             presentAcclStatus.text = "Detecting"
             print("On")
+            
             //main thread for UItext
             if pressStartDetect == false{
                 pressStartDetect = true
@@ -341,7 +334,8 @@ class ViewController: UIViewController {
             display.wiggle()
             if pressStartDetect{
                 pressStartDetect = false
-                stopAcclUpdate()
+                startAcclUpdate()
+                //stopAcclUpdate()
                 print("Already stop detecting")
                 
             }

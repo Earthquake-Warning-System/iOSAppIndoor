@@ -30,15 +30,14 @@
 
 import Foundation
 
-@_silgen_name("yudpsocket_server") func c_yudpsocket_server(_ host:UnsafePointer<Int8>,port:Int32,x:Int32) -> Int32
+@_silgen_name("yudpsocket_server") func c_yudpsocket_server(_ host:UnsafePointer<Int8>,port:Int32) -> Int32
 @_silgen_name("yudpsocket_recive") func c_yudpsocket_recive(_ fd:Int32,buff:UnsafePointer<Byte>,len:Int32,ip:UnsafePointer<Int8>,port:UnsafePointer<Int32>) -> Int32
 @_silgen_name("yudpsocket_close") func c_yudpsocket_close(_ fd:Int32) -> Int32
-@_silgen_name("yudpsocket_client") func c_yudpsocket_client(_ host:UnsafePointer<Int8>,port:Int32,x:Int32) -> Int32
+@_silgen_name("yudpsocket_client") func c_yudpsocket_client() -> Int32
 @_silgen_name("yudpsocket_get_server_ip") func c_yudpsocket_get_server_ip(_ host:UnsafePointer<Int8>,ip:UnsafePointer<Int8>) -> Int32
 @_silgen_name("yudpsocket_sentto") func c_yudpsocket_sentto(_ fd:Int32,buff:UnsafePointer<Byte>,len:Int32,ip:UnsafePointer<Int8>,port:Int32) -> Int32
 @_silgen_name("enable_broadcast") func c_enable_broadcast(_ fd:Int32)
 
-let x = socket(AF_INET, SOCK_DGRAM, 0);
 open class UDPClient: Socket {
     public override init(address: String, port: Int32) {
         let remoteipbuff: [Int8] = [Int8](repeating: 0x0,count: 16)
@@ -50,7 +49,7 @@ open class UDPClient: Socket {
         
         super.init(address: ip, port: port)
       
-        let fd: Int32 = c_yudpsocket_client(address, port: port, x:x)
+        let fd: Int32 = c_yudpsocket_client()
         if fd > 0 {
             self.fd = fd
         }
@@ -146,7 +145,7 @@ open class UDPServer: Socket {
     public override init(address: String, port: Int32) {
         super.init(address: address, port: port)
       
-        let fd = c_yudpsocket_server(address, port: port, x:x)
+        let fd = c_yudpsocket_server(address, port: port)
         if fd > 0 { 
             self.fd = fd
         }

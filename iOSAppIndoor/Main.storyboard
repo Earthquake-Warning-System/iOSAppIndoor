@@ -431,9 +431,8 @@ It will receive notification from EEWSIndoor.</string>
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhJ-85-6wv">
-                                            <rect key="frame" x="269" y="6" width="30" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhJ-85-6wv">
+                                            <rect key="frame" x="285" y="7.5" width="30" height="28.5"/>
                                             <state key="normal" title="Test">
                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
@@ -442,6 +441,11 @@ It will receive notification from EEWSIndoor.</string>
                                             </connections>
                                         </button>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="dhJ-85-6wv" secondAttribute="trailing" constant="60" id="Ddb-HL-lH8"/>
+                                        <constraint firstItem="dhJ-85-6wv" firstAttribute="centerY" secondItem="zNz-7n-4oJ" secondAttribute="centerY" id="jJ9-0a-3HA"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="dhJ-85-6wv" secondAttribute="bottom" constant="-3" id="orL-vb-EQ8"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -559,7 +563,6 @@ It will receive notification from EEWSIndoor.</string>
         <image name="lowPowerImage.jpg" width="2048" height="2048"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XRH-je-CjM"/>
-        <segue reference="aWt-rd-kdm"/>
+        <segue reference="Pf9-rh-tmz"/>
     </inferredMetricsTieBreakers>
 </document>

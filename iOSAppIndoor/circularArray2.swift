@@ -15,7 +15,7 @@ public struct CircularArray2<T> {
     public var Size = 0
     
     public init(count: Int) {
-        array = [T?](repeating: nil, count: count)
+        array = [T?](repeating: nil, count: 25)
     }
     
     public mutating func write(_ element: T) {

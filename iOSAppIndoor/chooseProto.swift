@@ -23,11 +23,9 @@ public func chooseProto(packetType: PacketType, recvProto: Data){
         eqEventCount += 1
         eqEventTime = Date()
         var l = 0
-        while l < 10{
-            if deviceToken[l].count > 5{
-                let sender = PushNotificationSender()
-                sender.sendPushNotification(to: deviceToken[l], title: "Warning", body: "Sharking Detected")
-            }
+        while l < deviceToken.count{
+            let sender = PushNotificationSender()
+            sender.sendPushNotification(to: deviceToken[l], title: "Warning", body: "Sharking Detected")
             l += 1
         }
         break
@@ -38,8 +36,6 @@ public func chooseProto(packetType: PacketType, recvProto: Data){
         let countryServer = UDPClient(address: decodeData3.serverIp, port: decodeData3.serverPort)
         CountryServer = countryServer
         print(CountryServer.address,CountryServer.port)
-        //kpAliveAck()
-        print("Reconnect with countryServer/n")
         break*/
     case "5":
         let decodeData5 = try! KpAliveAck.parseFrom(data: recvProto as Data)

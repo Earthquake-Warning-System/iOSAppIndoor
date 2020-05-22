@@ -31,7 +31,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/socket.h>
-
 #include <arpa/inet.h>
 #include <sys/types.h>
 #include <string.h>
@@ -40,10 +39,10 @@
 #define yudpsocket_buff_len 8192
 
 //return socket fd
-int yudpsocket_server(const char *address, int port, int x) {
+int yudpsocket_server(const char *address, int port) {
   
     //create socket
-    int socketfd=x;
+    int socketfd=socket(AF_INET, SOCK_DGRAM, 0);
     int reuseon = 1;
     int r = -1;
   
@@ -61,7 +60,6 @@ int yudpsocket_server(const char *address, int port, int x) {
         serv_addr.sin_addr.s_addr = inet_addr(address);
         serv_addr.sin_port = htons(port);
     }
-
   
     if (r == -1) {
        return -1;
@@ -92,9 +90,9 @@ int yudpsocket_close(int socket_fd) {
 }
 
 //return socket fd
-int yudpsocket_client(const char *address, int port, int x) {
+int yudpsocket_client() {
     //create socket
-    int socketfd = x;
+    int socketfd = socket(AF_INET, SOCK_DGRAM, 0);
     int reuseon = 1;
     setsockopt(socketfd, SOL_SOCKET, SO_REUSEADDR, &reuseon, sizeof(reuseon));
   

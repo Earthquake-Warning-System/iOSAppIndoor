@@ -13,7 +13,6 @@ var kpAliveTime: Date?
 var eqEventTime: Date?
 var kpAliveCount = 0
 var eqEventCount = 0
-var totalAccl = 0.0
 var logAcclTime: Date?
 var logAccl = 0.0
 
@@ -44,8 +43,6 @@ class logController: UIViewController {
             print("EqEvent is not detected.")
             log.text += "EqEvent is not detected.\n"
         }
-        print(presentAccl.count)
-        print("Accl = \(totalAccl)")
         
         log.isEditable = false
         log.textContainer.maximumNumberOfLines = 100
