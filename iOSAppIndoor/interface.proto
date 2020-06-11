@@ -39,14 +39,16 @@ message Boot_kp
 {
     string packet_type = 1; //earthquake occur packet : 4
     string server_ID   = 2;
-    string version     = 3;
+    string token       = 3;
+    string version     = 4;
 }
 
 message kp_alive_ack
 {
     string packet_type = 1; //user keep alive with ack respond : 5
-    string role        = 2; // server : 1 ; user : 0
-    string version     = 3;
+    uint32 role        = 2; // robot : 0 ; server : 1
+    string server_id   = 3;
+    string version     = 4;
 }
 
 message packet_type         //is used to identify type of packet

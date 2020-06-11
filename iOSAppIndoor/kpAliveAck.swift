@@ -10,7 +10,7 @@ import Foundation
 import SwiftSocket
 
 //kpAliveAckpacket to send Server.
-public func kpAliveAck(){
+/*public func kpAliveAck(){
     let test = KpAliveAck.Builder()
     test.setPacketType("5")
     test.setVersion("2")
@@ -23,4 +23,4 @@ public func kpAliveAck(){
     case .failure(let error):
         print("Client failed to send message5 to server: \(error)")
     }
-}
+}*/

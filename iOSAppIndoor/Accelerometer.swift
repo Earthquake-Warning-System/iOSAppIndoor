@@ -62,15 +62,7 @@ var acclDerection = ""
 //stop detecing
 func stopAcclUpdate(averageAccZWindow: CircularArray1<Double>, turningPointWindow: CircularArray2<Double>){
     motionManager.stopAccelerometerUpdates()
-    //print(averageAccZWindow)
-    //print(turningPointWindow)
-    /*averageAccZWindow = CircularArray1<Double>(count: windowSizesForAvgAccZ)
-    averageAccZWindow.readIndex = 0
-    averageAccZWindow.writeIndex = 0
-    averageAccZWindow.tailIndex = 49
-    averageAccZWindow.Size = 0
-    averageAccZWindow.array = [Double](repeating: 0.0, count: 50)
-    print(averageAccZWindow)*/
+    
 }
 
 //start detecting
@@ -227,6 +219,7 @@ func startAcclUpdate(){
                                                 eqEvent()
                                                 sleep(5)
                                                 if sendCorrectEqEvent{
+                                                    sendCorrectEqEvent = false
                                                     lastSendCorrectEqEvent = true
                                                     //restore valueOfReliable
                                                     valueOfReliable = 100
@@ -409,7 +402,4 @@ func whichTypeDetect(){
     isFirstDetect = false
     thisLaunchFirstDetect = false
 }
-class CircularArray{
-    //static var averageAccZWindow = CircularArray1<Double>(count: windowSizesForAvgAccZ)
-    //static var turningPointWindow = CircularArray2<Double>(count: windowSizesForTurningPoint)
-}
+

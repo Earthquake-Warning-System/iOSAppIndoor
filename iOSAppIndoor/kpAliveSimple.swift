@@ -9,9 +9,8 @@
 import Foundation
 import SwiftSocket
 public func kpAliveSimple(){
-    let test = KpAlive.Builder()
+    let test = KpAliveAck.Builder()
     test.setPacketType("5")
-    
     let protoData5: Data = try! test.build().data()
     
     switch sendDataToServer(proto: protoData5){

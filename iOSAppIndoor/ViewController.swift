@@ -2,7 +2,6 @@ import UIKit
 import AVFoundation
 import SwiftSocket
 import ProtocolBuffers
-//import SwiftProtobuf
 import CoreData
 
 var timer2 = Timer()
@@ -42,7 +41,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        UIApplication.shared.isIdleTimerDisabled = true
         notRepeatDoing = true
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -52,8 +51,6 @@ class ViewController: UIViewController {
             timer3 = Timer.scheduledTimer(timeInterval:30, target: self, selector: #selector(self.shortKpAlive), userInfo: nil, repeats: true)
         }
         
-        
-        UIApplication.shared.isIdleTimerDisabled = true
         lowPowerImage.isHidden = true
         presentForDetectingShaking.isHidden = true
         presentForReceivingingShaking.isHidden = true
@@ -90,13 +87,7 @@ class ViewController: UIViewController {
                 connectToServer = true
                 
                 reqBSForNewCS()
-                //kpAlive with CS
-                queue1.async {
-                    while true{
-                        self.kpAliveWithCS()
-                        sleep(UInt32(kpTime))
-                    }
-                }
+                
     
                 //Send shakingAlert packet to CS.
                 queue2.async{
@@ -255,7 +246,6 @@ class ViewController: UIViewController {
     @objc func pressForCancelImage(){
         self.presentForDetectingShaking.isHidden = true
         if sendCorrectEqEvent{
-            sendCorrectEqEvent = false
             print("Detection is true.")
             self.presentForReceivingingShaking.isHidden = false
             timer2 = Timer.scheduledTimer(timeInterval:5 , target: self, selector: #selector(self.cancelImage), userInfo: nil, repeats: true)
@@ -299,7 +289,13 @@ class ViewController: UIViewController {
         if sender.isOn == true{
             presentAcclStatus.text = "Detecting"
             print("On")
-            
+            //kpAlive with CS
+            queue1.async {
+                while true{
+                    self.kpAliveWithCS()
+                    sleep(UInt32(kpTime))
+                }
+            }
             //main thread for UItext
             if pressStartDetect == false{
                 pressStartDetect = true
