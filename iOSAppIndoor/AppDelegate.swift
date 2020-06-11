@@ -50,7 +50,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         print("application Will Enter Background")
         
-        // now, do what you want to do
         
     }
     
