@@ -310,8 +310,8 @@
                                     <segue destination="INM-Mf-KL5" kind="presentation" id="TGS-MX-a2v"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Welcome to EEWS " textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="FLn-WJ-OG9">
-                                <rect key="frame" x="87" y="216" width="200" height="65"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Welcome to EEWS " textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FLn-WJ-OG9">
+                                <rect key="frame" x="87.5" y="201" width="200" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="07j-po-4H7"/>
                                     <constraint firstAttribute="height" constant="65" id="vOO-NR-mqO"/>
@@ -324,12 +324,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ZVS-hu-q4N" firstAttribute="trailing" secondItem="Xyb-Ln-uFQ" secondAttribute="trailing" id="FlQ-D7-IXe"/>
+                            <constraint firstItem="FLn-WJ-OG9" firstAttribute="centerX" secondItem="WB4-1R-ybe" secondAttribute="centerX" id="IQa-0j-w4g"/>
                             <constraint firstItem="ZVS-hu-q4N" firstAttribute="bottom" secondItem="Xyb-Ln-uFQ" secondAttribute="bottom" id="O7C-Y3-A03"/>
-                            <constraint firstItem="FLn-WJ-OG9" firstAttribute="leading" secondItem="Xyb-Ln-uFQ" secondAttribute="leading" constant="87" id="P0t-SR-001"/>
                             <constraint firstItem="IsX-Le-wWF" firstAttribute="centerY" secondItem="WB4-1R-ybe" secondAttribute="centerY" constant="270" id="PfA-qk-87g"/>
-                            <constraint firstItem="FLn-WJ-OG9" firstAttribute="top" secondItem="Xyb-Ln-uFQ" secondAttribute="top" constant="196" id="Suv-tZ-hHw"/>
                             <constraint firstItem="ZVS-hu-q4N" firstAttribute="leading" secondItem="Xyb-Ln-uFQ" secondAttribute="leading" id="Xlf-60-8Oa"/>
                             <constraint firstItem="IsX-Le-wWF" firstAttribute="centerX" secondItem="WB4-1R-ybe" secondAttribute="centerX" constant="130" id="aCF-kV-aTA"/>
+                            <constraint firstItem="FLn-WJ-OG9" firstAttribute="centerY" secondItem="WB4-1R-ybe" secondAttribute="centerY" constant="-100" id="kCl-ZQ-L0t"/>
                             <constraint firstItem="ZVS-hu-q4N" firstAttribute="top" secondItem="WB4-1R-ybe" secondAttribute="top" id="rmp-CP-ptP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Xyb-Ln-uFQ"/>
@@ -351,7 +351,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ilX-s0-Ghu">
-                                <rect key="frame" x="52.5" y="183.5" width="270" height="300"/>
+                                <rect key="frame" x="52.5" y="233.5" width="270" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="cpF-2v-caD"/>
                                     <constraint firstAttribute="width" constant="270" id="zQO-Td-ibg"/>
@@ -369,7 +369,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rji-Ju-gcX">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rji-Ju-gcX">
                                 <rect key="frame" x="67.5" y="183.5" width="240" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="6pE-rN-ZH7"/>
@@ -397,11 +397,11 @@
                                     <segue destination="BYZ-38-t0r" kind="presentation" id="hux-9b-sKA"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Recommendations for use" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="12v-a5-R1p">
-                                <rect key="frame" x="72" y="111" width="230" height="30"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Recommendations for use" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12v-a5-R1p">
+                                <rect key="frame" x="72" y="111" width="230" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="230" id="Ccw-mc-23D"/>
-                                    <constraint firstAttribute="height" constant="30" id="ZKs-nW-bQz"/>
+                                    <constraint firstAttribute="height" constant="50" id="ZKs-nW-bQz"/>
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -414,12 +414,13 @@
                             <constraint firstItem="HxA-Jb-ibU" firstAttribute="centerX" secondItem="SwU-12-foy" secondAttribute="centerX" constant="130" id="9zY-hU-ZcR"/>
                             <constraint firstItem="ilX-s0-Ghu" firstAttribute="centerX" secondItem="SwU-12-foy" secondAttribute="centerX" id="AK2-sd-MKy"/>
                             <constraint firstItem="rji-Ju-gcX" firstAttribute="centerY" secondItem="SwU-12-foy" secondAttribute="centerY" id="BZ6-iZ-oQD"/>
+                            <constraint firstItem="oXx-A5-gRx" firstAttribute="trailing" secondItem="12v-a5-R1p" secondAttribute="trailing" constant="73" id="HrQ-Dl-1Np"/>
                             <constraint firstItem="12v-a5-R1p" firstAttribute="leading" secondItem="oXx-A5-gRx" secondAttribute="leading" constant="72" id="I2W-YF-hsg"/>
                             <constraint firstItem="OGs-Z2-rUd" firstAttribute="leading" secondItem="oXx-A5-gRx" secondAttribute="leading" id="Kt9-mh-6Xt"/>
                             <constraint firstItem="OGs-Z2-rUd" firstAttribute="bottom" secondItem="oXx-A5-gRx" secondAttribute="bottom" id="N3l-lR-tON"/>
                             <constraint firstItem="OGs-Z2-rUd" firstAttribute="trailing" secondItem="oXx-A5-gRx" secondAttribute="trailing" id="T6G-FZ-alM"/>
                             <constraint firstItem="12v-a5-R1p" firstAttribute="top" secondItem="oXx-A5-gRx" secondAttribute="top" constant="91" id="TpF-zd-Ela"/>
-                            <constraint firstItem="ilX-s0-Ghu" firstAttribute="centerY" secondItem="SwU-12-foy" secondAttribute="centerY" id="l6n-eA-b5l"/>
+                            <constraint firstItem="ilX-s0-Ghu" firstAttribute="centerY" secondItem="SwU-12-foy" secondAttribute="centerY" constant="50" id="l6n-eA-b5l"/>
                             <constraint firstItem="OGs-Z2-rUd" firstAttribute="top" secondItem="SwU-12-foy" secondAttribute="top" id="udL-qg-sPJ"/>
                             <constraint firstItem="HxA-Jb-ibU" firstAttribute="centerY" secondItem="SwU-12-foy" secondAttribute="centerY" constant="270" id="v6R-Kz-H8U"/>
                         </constraints>
@@ -578,7 +579,7 @@
         <image name="lowPowerImage.jpg" width="2048" height="2048"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="i9q-N4-4cC"/>
+        <segue reference="TGS-MX-a2v"/>
         <segue reference="hux-9b-sKA"/>
     </inferredMetricsTieBreakers>
 </document>
